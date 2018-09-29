@@ -67,19 +67,19 @@ export class DateEditorComponent implements ControlValueAccessor  {
       this.onTouchedCallback = fn;
   }
 
-  private get upEnabled() : boolean {
+  public get upEnabled() : boolean {
     return this.innerValue > this.min;
   }
 
-  private get downEnabled() : boolean {
+  public get downEnabled() : boolean {
     return this.innerValue < this.max;
   }
 
-  private upClicked() {
+  public upClicked() {
     this.innerValue = new Date(this.innerValue.valueOf() - DAY)
   }
 
-  private downClicked() {
+  public downClicked() {
     this.innerValue = new Date(this.innerValue.valueOf() + DAY)
   }
 }

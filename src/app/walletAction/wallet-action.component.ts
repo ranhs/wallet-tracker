@@ -8,10 +8,10 @@ const DAY = 24*60*60*1000;
   styleUrls: ['./wallet-action.component.css']
 })
 export class WalletActionComponent {
-    private minDate: Date;
-    private maxDate: Date;
-    private date : Date;
-    private valueChange : number = 0;
+    public minDate: Date;
+    public maxDate: Date;
+    public date : Date;
+    public valueChange : number = 0;
     constructor() {
         var now : number = Date.now();
         var today : Date = new Date( now - now % DAY );
@@ -27,5 +27,5 @@ export class WalletActionComponent {
         }
         this.minDate.setDate(1);
     }
-    private description : string ='aaa';
+    public description : string ='aaa';
 }

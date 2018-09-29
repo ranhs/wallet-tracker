@@ -18,13 +18,13 @@ export class CurrencyInputComponent implements ControlValueAccessor {
     private onChangeCallback;
     private onTouchedCallback;
     private _value : string = "";
-    private minus : boolean = true;
+    public minus : boolean = true;
 
-    private get value() : string {
+    public get value() : string {
         return this._value;
     }
 
-    private set value(val : string) {
+    public set value(val : string) {
         if ( this._value !== val ) {
             this._value = val;
             this.onValueChange();
@@ -61,7 +61,7 @@ export class CurrencyInputComponent implements ControlValueAccessor {
         this.onValueChange();
     }
 
-    private get sign() : string {
+    public get sign() : string {
         return (this.minus) ? String.fromCharCode(0x229D) : String.fromCharCode(0x2295);
     }
 
@@ -81,14 +81,14 @@ export class CurrencyInputComponent implements ControlValueAccessor {
         return false;
     }
 
-    private onSignClicked() {
+    public onSignClicked() {
         this.minus = !this.minus
         if ( this.innerValue !== 0 ) {
             this.onValueChange();
         }
     }
 
-    private onKeyPress($event) {
+    public onKeyPress($event) {
         if ( !this.isValidKey($event.key, $event.srcElement.selectionStart, $event.srcElement.selectionEnd - $event.srcElement.selectionStart) )
             $event.preventDefault();
     }
