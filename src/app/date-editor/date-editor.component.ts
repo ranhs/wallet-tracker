@@ -29,7 +29,7 @@ export class DateEditorComponent implements ControlValueAccessor  {
     return `${(val<10)?'0':''}${val}`;
   }
 
-  private get dateStr() : string {
+  public get dateStr() : string {
     var value : Date = this.innerValue;
     if ( !value ) return '';
     return `${this.dd(value.getDate())}/${this.dd(value.getMonth()+1)}/${value.getFullYear()}`;
