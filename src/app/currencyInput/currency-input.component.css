@@ -1,0 +1,15 @@
+input {
+    text-align: right;
+}
+
+td {
+    cursor: pointer;
+}
+
+.minus {
+    color: green;
+}
+
+.plus {
+    color: blue;
+}

@@ -1,0 +1,4 @@
+<span [class] = "(minus)?'minus':'plus'" dir="ltr">
+    <td (click)="onSignClicked()">{{sign}}</td>
+    <td><input [class] = "(minus)?'minus':'plus'" [(ngModel)]="value" (keypress)="onKeyPress($event)"></td>
+</span>

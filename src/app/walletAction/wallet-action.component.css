@@ -1,0 +1,8 @@
+tr {
+    width: 100%;
+}
+td {
+    width: 25%;
+    border: 1px solid black;
+    text-align: right;
+}

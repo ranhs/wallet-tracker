@@ -1,0 +1,14 @@
+<div>
+    <tr>
+        <td>תאריך</td>        
+        <td>תוכן</td>
+        <td>סכום</td>
+        <td>יתרה</td>
+    </tr>
+    <tr>
+        <td><app-date-editor [(ngModel)]="date" [min]="minDate" [max]="maxDate"></app-date-editor></td>
+        <td><input [(ngModel)]="description"></td>
+        <td><currency-input [(ngModel)]="valueChange"></currency-input></td>
+        <td dir="ltr">{{valueChange}}</td>
+    </tr>
+</div>
