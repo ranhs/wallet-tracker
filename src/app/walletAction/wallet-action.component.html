@@ -1,14 +1,26 @@
 <div>
     <tr>
-        <td>תאריך</td>        
-        <td>תוכן</td>
-        <td>סכום</td>
-        <td>יתרה</td>
+        <td class="title">תאריך</td>        
     </tr>
     <tr>
         <td><app-date-editor [(ngModel)]="date" [min]="minDate" [max]="maxDate"></app-date-editor></td>
+    </tr>
+    <tr>
+        <td class="title">תוכן</td>
+    </tr>
+    <tr>
         <td><input [(ngModel)]="description"></td>
+    </tr>
+    <tr>
+        <td class="title">סכום</td>
+    </tr>
+    <tr>
         <td><currency-input [(ngModel)]="valueChange"></currency-input></td>
+    </tr>
+    <tr>
+        <td class="title">יתרה</td>
+    </tr>
+    <tr>
         <td dir="ltr">{{valueChange}}</td>
     </tr>
 </div>

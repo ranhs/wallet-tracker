@@ -1,0 +1,13 @@
+td {
+    border: solid black 1px;
+    text-align: right;
+    padding: 0 5px;
+}
+
+div {
+    width: 100%;
+}
+
+tr {
+    width: 100%;
+}

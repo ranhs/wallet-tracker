@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { WalletActionComponent } from './walletAction/wallet-action.component';
 import { CurrencyInputComponent } from './currencyInput/currency-input.component';
 import { DateEditorComponent } from './date-editor/date-editor.component';
+import { WalletTableComponent } from './wallet-table/wallet-table.component';
 
 
 
@@ -14,7 +15,8 @@ import { DateEditorComponent } from './date-editor/date-editor.component';
     AppComponent,
     WalletActionComponent,
     CurrencyInputComponent,
-    DateEditorComponent
+    DateEditorComponent,
+    WalletTableComponent
   ],
   imports: [
     BrowserModule,

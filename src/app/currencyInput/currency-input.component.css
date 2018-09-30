@@ -1,9 +1,15 @@
 input {
     text-align: right;
+    font-size: 100%;
+}
+
+tr {
+    width: 70%;
 }
 
 td {
     cursor: pointer;
+    width: 70%;
 }
 
 .minus {
