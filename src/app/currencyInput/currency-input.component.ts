@@ -7,13 +7,12 @@ export const CURRENCY_INPUT_CONTROL_VALUE_ACCESSOR: any = {
     multi: true
 };
 
-// @Component({
-//   selector: 'currency-input',
-//   templateUrl: './currency-input.component.html',
-//   styleUrls: ['./currency-input.component.css'],
-//   providers: [CURRENCY_INPUT_CONTROL_VALUE_ACCESSOR]
-// })
-
+@Component({
+  selector: 'currency-input',
+  templateUrl: './currency-input.component.html',
+  styleUrls: ['./currency-input.component.css'],
+  providers: [CURRENCY_INPUT_CONTROL_VALUE_ACCESSOR]
+})
 export class CurrencyInputComponent implements ControlValueAccessor {
     private onChangeCallback;
     private onTouchedCallback;
