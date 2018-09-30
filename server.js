@@ -1,7 +1,6 @@
 const path = require('path');
 const express = require('express');
 const app = express();
-const {  AppServerModuleNgFactory } = module.exports;
 
 // If an incoming request uses
 // a protocol other than HTTPS,
@@ -37,12 +36,3 @@ app.get('/*', function(req, res) {
 // Start the app by listening on the default
 // Heroku port
 app.listen(process.env.PORT || 8080);
-
-if ( typeof(AppServerModuleNgFactory) == 'undefined') {
-  const { AppServerModuleNgFactory } = require('../dist/out-tsc/src/app/app.server.module.ngfactory');
-  renderModuleFactory(AppServerModuleNgFactory, opts)
-  .then(html => callback(null, html));
-} else {
-  renderModuleFactory(AppServerModuleNgFactory, opts)
-  .then(html => callback(null, html));
-}
