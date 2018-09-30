@@ -5,14 +5,14 @@ td {
 }
 
 input {
-    font-size: 150%;
-    width: 80%;
+    font-size: 100%;
+    width: 99%;
 }
 
 .title {
     background-color: lightgray;
 }
 
-div {
-    width: 80%;
+table {
+    width: 100%;
 }
