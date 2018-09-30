@@ -94,12 +94,16 @@ export class CurrencyInputComponent implements ControlValueAccessor {
 
     public writeValue(value: any) {
         if (value !== this.innerValue) {
+            console.log('writing value', value);
             this.innerValue = value;
         }
     }
 
     public registerOnChange(fn: any) {
-        this.onChangeCallback = fn;
+        this.onChangeCallback = (v) => {
+            console.log("changeCallback", v)
+            fn(v);
+        }
     }
 
     public registerOnTouched(fn: any) {
