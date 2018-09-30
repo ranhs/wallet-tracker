@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 
 const DAY = 24*60*60*1000;
 
-@Component({
-  selector: 'wallet-action',
-  templateUrl: './wallet-action.component.html',
-  styleUrls: ['./wallet-action.component.css']
-})
+// @Component({
+//   selector: 'wallet-action',
+//   templateUrl: './wallet-action.component.html',
+//   styleUrls: ['./wallet-action.component.css']
+// })
 export class WalletActionComponent {
     public minDate: Date;
     public maxDate: Date;
