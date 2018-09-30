@@ -4,18 +4,18 @@ import { FormsModule } from '@angular/forms';
 //import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppComponent } from './app.component';
-//import { WalletActionComponent } from './walletAction/wallet-action.component';
+import { WalletActionComponent } from './walletAction/wallet-action.component';
 import { CurrencyInputComponent } from './currencyInput/currency-input.component';
-//import { DateEditorComponent } from './date-editor/date-editor.component';
+import { DateEditorComponent } from './date-editor/date-editor.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    //WalletActionComponent,
-    CurrencyInputComponent
-    //DateEditorComponent
+    WalletActionComponent,
+    CurrencyInputComponent,
+    DateEditorComponent
   ],
   imports: [
     BrowserModule,

@@ -9,12 +9,12 @@ export const DATE_EDIT_CONTROL_VALUE_ACCESSOR: any = {
   multi: true
 };
 
-// @Component({
-//   selector: 'app-date-editor',
-//   templateUrl: './date-editor.component.html',
-//   styleUrls: ['./date-editor.component.css'],
-//   providers: [DATE_EDIT_CONTROL_VALUE_ACCESSOR]
-// })
+@Component({
+  selector: 'app-date-editor',
+  templateUrl: './date-editor.component.html',
+  styleUrls: ['./date-editor.component.css'],
+  providers: [DATE_EDIT_CONTROL_VALUE_ACCESSOR]
+})
 export class DateEditorComponent implements ControlValueAccessor  {
   @Input() public max : Date;
   @Input() public min : Date;
