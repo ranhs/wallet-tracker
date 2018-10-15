@@ -1,21 +1,32 @@
+div {
+    width: 100%;
+}
+
 input {
     text-align: right;
     font-size: 100%;
+    width: 100%;
 }
 
-tr {
-    width: 70%;
-}
 
 td {
     cursor: pointer;
-    width: 70%;
+}
+
+.sign {
+    width: 40px;
+}
+
+.number {
+    width: 100%;
 }
 
 .minus {
     color: green;
+    
 }
 
 .plus {
     color: blue;
+  
 }
