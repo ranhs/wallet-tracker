@@ -12,7 +12,7 @@ export const DATE_EDIT_CONTROL_VALUE_ACCESSOR: any = {
 @Component({
   selector: 'app-date-editor',
   templateUrl: './date-editor.component.html',
-  styleUrls: ['./date-editor.component.css'],
+  styleUrls: ['./date-editor.component.scss'],
   providers: [DATE_EDIT_CONTROL_VALUE_ACCESSOR]
 })
 export class DateEditorComponent implements ControlValueAccessor  {

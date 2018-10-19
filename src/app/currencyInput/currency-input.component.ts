@@ -10,7 +10,7 @@ export const CURRENCY_INPUT_CONTROL_VALUE_ACCESSOR: any = {
 @Component({
   selector: 'currency-input',
   templateUrl: './currency-input.component.html',
-  styleUrls: ['./currency-input.component.css'],
+  styleUrls: ['./currency-input.component.scss'],
   providers: [CURRENCY_INPUT_CONTROL_VALUE_ACCESSOR]
 })
 export class CurrencyInputComponent implements ControlValueAccessor {

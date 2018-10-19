@@ -5,7 +5,7 @@ const DAY = 24*60*60*1000;
 @Component({
   selector: 'wallet-action',
   templateUrl: './wallet-action.component.html',
-  styleUrls: ['./wallet-action.component.css']
+  styleUrls: ['./wallet-action.component.scss']
 })
 export class WalletActionComponent {
     public minDate: Date;

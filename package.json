@@ -11,7 +11,6 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "pree2e": "webdriver-manager update",
-    "postinstall": "ng build --aot -prod",
     "deploy": "git push origin master && git push heroku master"
   },
   "private": true,
@@ -32,7 +31,6 @@
     "core-js": "^2.4.1",
     "rxjs": "^5.5.6",
     "zone.js": "^0.8.19",
-
     "express": "^4.16.3"
   },
   "devDependencies": {
