@@ -1,4 +1,4 @@
-<table>
+<!-- <table>
     <tr>
         <td class="title">תאריך</td>        
     </tr>
@@ -23,4 +23,48 @@
     <tr>
         <td dir="ltr">{{valueChange}}</td>
     </tr>
-</table>
+</table> -->
+
+<div id="wallet-action">
+    <div id="value-input" [class.positive] = "false">
+        <div class="switch" >
+            <div class="switch-front">
+                <span class="positive-text">+</span>
+                <span class="negetive-text">-</span>
+            </div>
+        </div>
+        <div>
+            <span id="currency-symbol" style="padding-top: 8px; margin-left: 3px;">&#8362; <!--Sheqel sign--></span>
+            <input type="number" placeholder="0.0">
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="label">
+            עבור
+        </div>
+        <div> 
+            <input type="text" placeholder="על מה שולם?" style="max-width: 200px;">
+        </div>
+    </div>
+    <div class="row">
+        <div class="label">
+            תאריך
+        </div>
+        <div style="font-size: 22px"> 
+            1 ספט 2018
+            <div style="float: left; margin: -10px 0;">
+                <button><i class="material-icons">arrow_drop_up</i></button>
+                <button><i class="material-icons">arrow_drop_down</i></button>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding-top: 10px; padding-bottom: 10px;">
+        <span style="grid-column-start: 2; text-align: left; font-size: 22px">יתרה: 123</span>
+    </div>
+
+    <div id="buttons">
+        <button class="save">שמור</button>
+        <button class="cancel">בטל</button>
+    </div>
+</div>

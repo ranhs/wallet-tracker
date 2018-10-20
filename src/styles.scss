@@ -2,24 +2,19 @@
 body{
     margin: 0;
     background: #F2F2F2;
+    color: rgb(37, 37, 37);
     font-family: 'Montserrat', sans-serif;
     height: 100vh; 
     font-size: 20px;
 }
 
-#container{
-    height: 100vh;
-    display: grid;
-    grid-template-rows: 9vh auto 10vh;
-
-    .banner{
-        background-color: #0072bc;
-        color: #e1e1e1;
-        padding: 15px 30px;
-        box-shadow: rgba(0, 0, 0, 0.7) 0px 0px 8px;
-    }
-
-    a{
-        text-decoration: none;
-    }
+input{
+    font-size: 20px;
+    background-color: transparent;
+    border: none;
+    border-bottom: #0072bc 1px solid;
 }
+input:focus{
+    outline-width: 0;
+}
+

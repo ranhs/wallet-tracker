@@ -1,27 +1,13 @@
-<table dir="rtl">
-    <tr>
-        <td>תאריך</td>        
-        <td>תוכן</td>
-        <td>סכום</td>
-        <td>יתרה</td>
-    </tr>
-    <tr>
-      <td dir="ltr">31/08/2018</td>
-      <td>יתרה קודמת</td>
-      <td dir="ltr">+184.2</td>
-      <td dir="ltr">184.2</td>
-    </tr>
-    <tr>
-      <td dir="ltr">01/09/2018</td>
-      <td>לגנדה גלי</td>
-      <td dir="ltr">-28.0</td>
-      <td dir="ltr">156.2</td>
-    </tr>
-    <tr>
-      <td dir="ltr">02/09/2018</td>
-      <td>צהריים גלי</td>
-      <td dir="ltr">-50.0</td>
-      <td dir="ltr">106.2</td>
-  </tr>
-</table>
+<ul>
+  <li *ngFor="let t of transactions">
+    <div>
+      <span class="sum" [class.positive]="t.sum > 0">{{t.sum}}</span>
+      <span class="left">{{t.left}}</span>
+    </div>
+    <div>
+      <span class="title">{{t.title}}</span>
+      <span class="date">{{t.date}}</span>
+    </div>
+  </li>
+</ul>
 

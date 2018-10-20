@@ -1,20 +1,23 @@
-<!-- <div dir="rtl">
-    <h1>Wallet Tracker {{1+1}}</h1>
-    <app-wallet-table></app-wallet-table>
-    <br>
-    <br>
-    <wallet-action></wallet-action>
-</div> -->
 <div id="container">
+    <!--app header-->
     <div id="header" class="banner">
         Wallet Tracker
     </div>
     
-    <app-wallet-table></app-wallet-table>
+    <!--application table-->
+    <div id="content">
+        <app-wallet-table></app-wallet-table>
+    </div>
     
-    <a href="/new">
+    <!--To do: wallet-action-->
+    <!--Note only one of the two "add banner" and "walle-action" should be visible at the same time-->
+    <wallet-action style="display: none;"></wallet-action> <!--remove display none to display wallat-action-->
+
+    <!--Add new button-->
+    <a href="/new" style="display: "> <!--put here dispaly: none, before dispalying the "wallet-action" part.-->
     <div id="add" class="banner">
         הוסף
     </div>
     </a>
 </div>
+

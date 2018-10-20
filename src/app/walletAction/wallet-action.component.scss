@@ -1,18 +1,141 @@
-td {
-    border: 1px solid black;
-    text-align: right;
-    font-size: 200%;
-}
+#wallet-action{
+    background-color: #ebebeb;
+    box-shadow: rgba(0, 0, 0, 0.7) 0px 0px 8px;
 
-input {
-    font-size: 100%;
-    width: 99%;
-}
+    #value-input{
+        background-color: #e1e1e1;
+        display: grid;
+        grid-template-columns: 105px auto;
+        padding: 20px;
 
-.title {
-    background-color: lightgray;
-}
+        input{
+            text-align: right;
+            direction: rtl;
+            float:right;
 
-table {
-    width: 100%;
+            font-size: 40px;
+            max-width: 180px;
+            border: none;
+            background-color: transparent;
+
+            color: #0072bc; //cursor color
+            text-shadow: 0px 0px 0px #d33c2d; //text-color
+            -webkit-text-fill-color: transparent;
+        }
+        input:focus{
+            outline-width: 0;
+        }
+        #currency-symbol{
+            float:right;
+            color: #d33c2d;
+            font-size: 30px;
+        }
+
+        .switch {
+            display: inline-block;
+            width: 50px;
+            height: 25px;
+            border-radius: 3px;
+            background-color: rgb(237, 28, 36);
+            margin: 10px 0;
+
+            .switch-front{
+                display: inline-block;
+                width: 22px;
+                height: 23px;
+                margin: 1px;
+                border-radius: 2px;
+                background-color: rgb(246, 246, 246);
+                text-align: center;
+            }
+
+            .positive-text{
+                display: none;
+            }
+        }
+
+    }
+    #value-input.positive{
+        input{
+            text-shadow: 0px 0px 0px rgb(0, 114, 54); //text-color
+        }
+        #currency-symbol{
+            color: rgb(0, 114, 54);
+        }
+        .switch{
+            background-color: rgb(0, 114, 54);
+
+            .switch-front{
+                float: right;
+            }
+
+            .negetive-text{
+                display: none;
+            }
+            .positive-text{
+                display: inline-block;
+            }
+        }
+    }
+
+    .row{
+        display: grid;
+        grid-template-columns: 100px auto;
+        padding: 20px 10px;
+        margin: 0 10px;
+        text-align: right;
+        direction: rtl;
+        border-bottom: #e1e1e1 3px solid;
+
+        .label{
+            font-weight: bold;
+            font-size: 25px;
+            margin-top: -3px;
+        }
+
+        button{
+            background-color: transparent;
+            border: none;
+            margin: 0;
+            padding: 0;
+            border-radius: 50%;
+            float: left;
+            i{
+                font-size: 40px;
+            }
+        }
+        button:focus{
+            outline-width: 0;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+    }
+
+    #buttons{
+        display: grid;
+        grid-template-columns: auto auto;
+        direction: rtl;
+
+        button{
+            color: #ebebeb;
+            border: none;
+            padding: 12px;
+            font-size: 22px;
+        }
+        button:focus{
+            outline-width: 0;
+        }
+        button.save{
+            background-color: #00a651;
+        }
+        button.save:focus{
+            background-color: #008c44;
+        }
+        button.cancel{
+            background-color: #636363;
+        }
+        button.cancel:focus{
+            background-color: #5b5b5b;
+        }
+
+    }
 }
