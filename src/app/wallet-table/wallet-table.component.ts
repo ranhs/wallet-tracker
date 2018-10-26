@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WalletTableComponent implements OnInit {
 
-  private transactions: Transaction[]; 
+  public transactions: Transaction[]; 
 
   constructor() {
     this.transactions=
