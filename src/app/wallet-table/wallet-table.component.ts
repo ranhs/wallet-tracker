@@ -8,7 +8,7 @@ import { WalletTransaction } from '../wallet.transaction';
 })
 export class WalletTableComponent implements OnInit {
 
-  private transactions : WalletTransaction[] = [];
+  public transactions : WalletTransaction[] = [];
 
   constructor() {
    }
