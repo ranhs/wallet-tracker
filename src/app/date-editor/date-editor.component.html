@@ -1,7 +1,15 @@
-<div dir="ltr">
+<!-- <div dir="ltr">
   <span >{{dateStr}}</span>
   <div class="date-buttons">
       <button [disabled]="!upEnabled" (click)="upClicked()">▲</button>
       <button [disabled]="!downEnabled" (click)="downClicked()">▼</button>
   </div>
+</div> -->
+
+<div style="font-size: 22px"> 
+    {{dateStr}}
+    <div style="float: left; margin: -10px 0;">
+        <button [disabled]="!upEnabled" (click)="upClicked()"><i class="material-icons">arrow_drop_up</i></button>
+        <button [disabled]="!downEnabled" (click)="downClicked()"><i class="material-icons">arrow_drop_down</i></button>
+    </div>
 </div>

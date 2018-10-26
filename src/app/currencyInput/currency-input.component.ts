@@ -19,6 +19,7 @@ export class CurrencyInputComponent implements ControlValueAccessor {
     private _value : string = "";
     public minus : boolean = true;
 
+    //property "value"
     public get value() : string {
         return this._value;
     }

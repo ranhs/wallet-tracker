@@ -12,6 +12,8 @@ export class WalletActionComponent {
     public maxDate: Date;
     public date : Date;
     public valueChange : number = 0;
+    public total : number = 0;
+    
     constructor() {
         var now : number = Date.now();
         var today : Date = new Date( now - now % DAY );
