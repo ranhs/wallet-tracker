@@ -1,13 +1,12 @@
 <ul>
   <li *ngFor="let t of transactions">
     <div>
-      <span class="sum" [class.positive]="t.sum > 0">{{t.sum}}</span>
-      <span class="left">{{t.left}}</span>
+      <span class="sum" [class.positive]="t.value > 0">{{t.displayValue}}</span>
+      <span class="left">{{t.total}}</span>
     </div>
     <div>
-      <span class="title">{{t.title}}</span>
-      <span class="date">{{t.date}}</span>
+      <span class="title">{{t.description}}</span>
+      <span class="date">{{t.displayDate}}</span>
     </div>
   </li>
 </ul>
-

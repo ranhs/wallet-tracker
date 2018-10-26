@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { WalletTransaction } from '../wallet.transaction';
 
 @Component({
   selector: 'app-wallet-table',
@@ -7,63 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WalletTableComponent implements OnInit {
 
-  public transactions: Transaction[]; 
+  private transactions : WalletTransaction[] = [];
 
   constructor() {
-    this.transactions=
-    [
-      {
-        title: "יתרה קודמת",
-        date: "31 אוגוסט",
-        sum: 184,
-        left: 184
-      },
-      {
-        title: "לגנדה גלי",
-        date: "1 ספטמבר",
-        sum: -28,
-        left: 156
-      },
-      {
-        title: "צהריים גלי",
-        date: "1 ספטמבר",
-        sum: -50,
-        left: 106
-      },
-      {
-        title: "חופשי יומי שחר",
-        date: "2 ספטמבר",
-        sum: -40,
-        left: 66
-      },
-      {
-        title: "משיכה",
-        date: "4 ספטמבר",
-        sum: 200,
-        left: 266
-      },
-      {
-        title: "מכונת חטיפים",
-        date: "4 ספטמבר",
-        sum: -4.5,
-        left: 261.5
-      },
-      {
-        title: "פתוח קול שחר",
-        date: "4 ספטמבר",
-        sum: -200,
-        left: 61.5
-      },
-      {
-        title: "משיכה",
-        date: "4 ספטמבר",
-        sum: 200,
-        left: 261.5
-      },
-    ]
    }
 
   ngOnInit() {
+    // TODO: read the data from the database
+    this.transactions = [];
+    this.transactions.push(new WalletTransaction(new Date(2018,8,31), "יתרה קודמת", 184.2, 184.2));
+    this.transactions.push(new WalletTransaction(new Date(2018,9,1), "לגנדה גלי", -28, 156.2));
+    this.transactions.push(new WalletTransaction(new Date(2018,9,2), "צהריים גלי", -50, 106.2));
+    this.transactions.push(new WalletTransaction(new Date(2018,9,2), "חופשי יומי שחר", -40, 66.2));
+    this.transactions.push(new WalletTransaction(new Date(2018,9,4), "משיכה", 200, 266.2));
+    this.transactions.push(new WalletTransaction(new Date(2018,9,4), "מכונת חטיפים", -4.5, 261.7));
+    this.transactions.push(new WalletTransaction(new Date(2018,9,4), "פתוח קול שחר", -200, 61.7));
+    this.transactions.push(new WalletTransaction(new Date(2018,9,8), "משיכה", 200, 261.7));
   }
 
 }
