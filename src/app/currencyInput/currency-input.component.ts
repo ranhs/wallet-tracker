@@ -16,15 +16,15 @@ export const CURRENCY_INPUT_CONTROL_VALUE_ACCESSOR: any = {
 export class CurrencyInputComponent implements ControlValueAccessor {
     private onChangeCallback;
     private onTouchedCallback;
-    private _value : string = "";
+    private _value : number = 0;
     public minus : boolean = true;
 
     //property "value"
-    public get value() : string {
+    public get value() : number {
         return this._value;
     }
 
-    public set value(val : string) {
+    public set value(val : number) {
         if ( this._value !== val ) {
             this._value = val;
             this.onValueChange();
@@ -39,8 +39,8 @@ export class CurrencyInputComponent implements ControlValueAccessor {
 
     private get innerValue() : number {
         var val : number;
-        if ( this.value === "" ) return 0;
-        val = parseFloat(this.value);
+        if ( !this.value  ) return 0;
+        val = this.value;//parseFloat(this.value);
         if ( this.minus ) {
             val = - val;
         }
@@ -50,10 +50,10 @@ export class CurrencyInputComponent implements ControlValueAccessor {
     private set innerValue(val : number) {
         val = Math.round(val*10) / 10;
         if ( val === this.innerValue ) return;
-        if ( val === 0) {
-            this.value = "";
+        if ( !val ) {
+            this.value = 0;
         } else {
-            this.value = Math.abs(val).toString();
+            this.value = Math.abs(val);
             if ( val !==0 ) {
                 this.minus = (val < 0);
             }
@@ -65,15 +65,15 @@ export class CurrencyInputComponent implements ControlValueAccessor {
         return (this.minus) ? String.fromCharCode(0x229D) : String.fromCharCode(0x2295);
     }
 
-    private isValidKey(key : string, location: number, selectionLength: number) : boolean {
+    private isValidKey(key : string, prevText: string, location: number, selectionLength: number) : boolean {
         if ( key >= '0' && key <='9' ) {
             if ( key == '0' && location == 0 ) return false;
-            var decLoc = this.value.indexOf('.');
-            if ( decLoc >=0 && this.value.length-decLoc >=2 && location > decLoc) return false;
+            var decLoc = prevText.indexOf('.');
+            if ( decLoc >=0 && prevText.length-decLoc >=2 && location > decLoc) return false;
             return true;
         }
         if ( key == '.' ) {
-            var after = this.value;
+            var after = prevText;
             after = after.substr(0,location) + key + after.substr(location + selectionLength);
             if ( after.indexOf('.') !== after.lastIndexOf('.') || after.indexOf('.') < after.length - 2) return false;
             return true;
@@ -89,7 +89,7 @@ export class CurrencyInputComponent implements ControlValueAccessor {
     }
 
     public onKeyPress($event) {
-        if ( !this.isValidKey($event.key, $event.srcElement.selectionStart, $event.srcElement.selectionEnd - $event.srcElement.selectionStart) )
+        if ( !this.isValidKey($event.key, $event.srcElement.value, $event.srcElement.selectionStart, $event.srcElement.selectionEnd - $event.srcElement.selectionStart) )
             $event.preventDefault();
     }
 
