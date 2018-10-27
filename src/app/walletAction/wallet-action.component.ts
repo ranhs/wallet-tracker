@@ -29,5 +29,5 @@ export class WalletActionComponent {
         }
         this.minDate.setDate(1);
     }
-    public description : string ='aaa';
+    public description : string ='';
 }
