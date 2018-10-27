@@ -35,7 +35,7 @@ export class CurrencyInputComponent implements ControlValueAccessor {
         if (this.onChangeCallback) {
             this.onChangeCallback(this.innerValue);
         }
-}
+    }
 
     private get innerValue() : number {
         var val : number;
@@ -88,9 +88,11 @@ export class CurrencyInputComponent implements ControlValueAccessor {
         }
     }
 
-    public onKeyPress($event) {
+    private onKeyPress($event) {
         if ( !this.isValidKey($event.key, $event.srcElement.value, $event.srcElement.selectionStart, $event.srcElement.selectionEnd - $event.srcElement.selectionStart) )
             $event.preventDefault();
+
+        console.log("keypress");
     }
 
     public writeValue(value: any) {
@@ -106,4 +108,16 @@ export class CurrencyInputComponent implements ControlValueAccessor {
     public registerOnTouched(fn: any) {
         this.onTouchedCallback = fn;
     }
+
+    private onFocus(){
+        if (this._value == 0 ){
+            this._value = undefined;
+        }
+    }
+    private onFocusOut(){
+        if (this._value == undefined){
+            this._value = 0;
+        }
+    }
+
 }
