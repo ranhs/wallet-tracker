@@ -12,6 +12,6 @@
     </div>
     <div>
         <span id="currency-symbol" style="padding-top: 8px; margin-left: 3px;">&#8362; <!--Sheqel sign--></span>
-        <input type="number" pattern="[0-9]*" inputmode="numeric" placeholder="0.0" [(ngModel)]="value" (keypress)="onKeyPress($event)">
+        <input type="tel" placeholder="0.0" [(ngModel)]="value" ><!--pattern="[0-9]*[.[0-9]]" inputmode="numeric"><!--(keypress)="onKeyPress($event)"-->
     </div>
 </div>
