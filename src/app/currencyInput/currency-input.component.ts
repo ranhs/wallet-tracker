@@ -1,5 +1,7 @@
-import { Component, forwardRef  } from '@angular/core';
+import { Component, forwardRef, ChangeDetectorRef, OnInit  } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { $ } from 'jquery';
+import {  } from '';
 
 export const CURRENCY_INPUT_CONTROL_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
@@ -13,12 +15,37 @@ export const CURRENCY_INPUT_CONTROL_VALUE_ACCESSOR: any = {
   styleUrls: ['./currency-input.component.scss'],
   providers: [CURRENCY_INPUT_CONTROL_VALUE_ACCESSOR]
 })
-export class CurrencyInputComponent implements ControlValueAccessor {
+export class CurrencyInputComponent implements ControlValueAccessor, OnInit {
     private onChangeCallback;
     private onTouchedCallback;
     private _value : number = 0;
     public minus : boolean = true;
 
+    public inputLength : number = 20;
+
+    constructor(private changeDetector: ChangeDetectorRef) {}
+
+    ngOnInit(){
+    }
+
+    private updateInputLength(){
+        var length = document.getElementById("length-reference").getBoundingClientRect().width; 
+        
+        this.inputLength = length;
+
+        this.changeDetector.detectChanges();
+
+
+        
+    }
+    private valuechange(newValue){
+        this.value = newValue; 
+        
+        //we need to use TimeOut so the value will change first, before we update the input-length
+        //note that settimeout doesn't remember the correct "this" reference, so we need to save it
+        var _this = this;
+        setTimeout(function(){_this.updateInputLength(); }, 1);
+    }
     //property "value"
     public get value() : number {
         return this._value;
@@ -92,7 +119,6 @@ export class CurrencyInputComponent implements ControlValueAccessor {
         if ( !this.isValidKey($event.key, $event.srcElement.value, $event.srcElement.selectionStart, $event.srcElement.selectionEnd - $event.srcElement.selectionStart) )
             $event.preventDefault();
 
-        console.log("keypress");
     }
 
     public writeValue(value: any) {
@@ -112,11 +138,16 @@ export class CurrencyInputComponent implements ControlValueAccessor {
     private onFocus(){
         if (this._value == 0 ){
             this._value = undefined;
+            this.inputLength = 0;
         }
+
     }
     private onFocusOut(){
-        if (this._value == undefined){
+        if (!this._value){
             this._value = 0;
+
+        var _this = this;
+        setTimeout(function(){_this.updateInputLength(); }, 1);
         }
     }
 

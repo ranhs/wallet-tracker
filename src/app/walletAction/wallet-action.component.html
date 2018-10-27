@@ -1,30 +1,3 @@
-<!-- <table>
-    <tr>
-        <td class="title">תאריך</td>        
-    </tr>
-    <tr>
-        <td><app-date-editor [(ngModel)]="date" [min]="minDate" [max]="maxDate"></app-date-editor></td>
-    </tr>
-    <tr>
-        <td class="title">תוכן</td>
-    </tr>
-    <tr>
-        <td><input [(ngModel)]="description"></td>
-    </tr>
-    <tr>
-        <td class="title">סכום</td>
-    </tr>
-    <tr>
-        <td><currency-input [(ngModel)]="valueChange"></currency-input></td>
-    </tr>
-    <tr>
-        <td class="title">יתרה</td>
-    </tr>
-    <tr>
-        <td dir="ltr">{{valueChange}}</td>
-    </tr>
-</table> -->
-
 <div id="wallet-action">
 
     <currency-input [(ngModel)]="valueChange"></currency-input>
@@ -44,7 +17,10 @@
        <date-editor [(ngModel)]="date" [min]="minDate" [max]="maxDate"></date-editor>
     </div>
     <div class="row" style="padding-top: 10px; padding-bottom: 10px;">
-        <span style="grid-column-start: 2; text-align: left; font-size: 22px">יתרה: {{valueChange}}</span>
+        <div style="grid-column-start: 2; font-size: 22px; text-align: left;">
+            <span>יתרה: </span>
+            <span dir="ltr">{{valueChange}}</span>
+        </div>
     </div>
 
     <div id="buttons">
