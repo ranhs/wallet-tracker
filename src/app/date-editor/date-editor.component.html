@@ -6,8 +6,8 @@
   </div>
 </div> -->
 
-<div style="font-size: 22px"> 
-    {{dateStr}}
+<div style="font-size: 22px" class="outer"> 
+    <span class="date-str">{{dateStr}}</span>
     <div style="float: left; margin: -10px 0;">
         <button [disabled]="!upEnabled" (click)="upClicked()"><i class="material-icons">arrow_drop_up</i></button>
         <button [disabled]="!downEnabled" (click)="downClicked()"><i class="material-icons">arrow_drop_down</i></button>

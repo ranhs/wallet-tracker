@@ -1,3 +1,14 @@
+div.outer{
+    display: grid;
+    grid-template-columns: auto 80px;
+    height: 100%;
+}
+.date-str{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
 button{
     background-color: transparent;
     border: none;
