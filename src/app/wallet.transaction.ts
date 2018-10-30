@@ -1,9 +1,14 @@
 export class WalletTransaction {
     constructor( 
+        private _id : number,
         private _date : Date,
         private _description : string,
         private _value : number, 
         private _total : number) {
+    }
+
+    public get id() : number {
+        return this._id;
     }
 
     public get date() : Date {

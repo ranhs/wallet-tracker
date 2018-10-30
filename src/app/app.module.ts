@@ -7,6 +7,7 @@ import { WalletActionComponent } from './walletAction/wallet-action.component';
 import { CurrencyInputComponent } from './currencyInput/currency-input.component';
 import { DateEditorComponent } from './date-editor/date-editor.component';
 import { WalletTableComponent } from './wallet-table/wallet-table.component';
+import { TransactionStorageService } from './transaction-storage.service';
 
 
 
@@ -22,7 +23,7 @@ import { WalletTableComponent } from './wallet-table/wallet-table.component';
     BrowserModule,
     FormsModule
   ],
-  providers: [],
+  providers: [TransactionStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
