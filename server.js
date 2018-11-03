@@ -27,7 +27,7 @@ app.use(forceSSL());
 // in the dist directory
 app.use(express.static(__dirname + '/dist'));
 
-//plugins.plugin(app);
+plugins.plugin(app);
 
 // For all GET requests, send back index.html
 // so that PathLocationStrategy can be used
