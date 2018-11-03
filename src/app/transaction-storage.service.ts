@@ -13,7 +13,7 @@ export class TransactionStorageService {
         var transactions : WalletTransaction[] = [];
         for ( var trans of data ) {
           console.log('trans', trans);
-          //transactions.push( new WalletTransaction(trans.id, new Date(), trans.description, trans.value, trans.total));
+          transactions.push( new WalletTransaction(trans.id, new Date(trans.date.year, trans.date.month-1, trans.date.day), trans.description, trans.value, trans.total));
         }
         resolve(transactions);
       });
