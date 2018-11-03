@@ -12,6 +12,7 @@ export class TransactionStorageService {
       var rv = this.http.get('/transactions').subscribe( (data : {id:number, date: {year: number, month: number, day: number}, description: string, value: number, total: number}[] ) => {
         var transactions : WalletTransaction[] = [];
         for ( var trans of data ) {
+          console.log('trans', trans);
           transactions.push( new WalletTransaction(trans.id, new Date(trans.date.year, trans.date.month-1, trans.date.day), trans.description, trans.value, trans.total));
         }
         resolve(transactions);
