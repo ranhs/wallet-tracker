@@ -1,6 +1,6 @@
 const path = require('path');
 const express = require('express');
-const plugins = require('./src/server/plugins');
+const plugins = require('./src/server/plugin');
 
 var app = express();
 // If an incoming request uses
