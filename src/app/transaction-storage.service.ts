@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { WalletTransaction } from './wallet.transaction';
 
 @Injectable()
 export class TransactionStorageService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   getTransactions(startDate : Date, endDate : Date) : Promise<WalletTransaction[]> {
     return new Promise<WalletTransaction[]>((resolve, reject) => {
+      var rv = this.http.get('/transactions');
+      console.log('get returned', rv);
       var dummyTransactions : WalletTransaction[] = [];
       dummyTransactions.push(new WalletTransaction(1, new Date(2018,8-1,31), "יתרה קודמת", 184.2, 184.2));
       dummyTransactions.push(new WalletTransaction(2, new Date(2018,9-1,1), "לגנדה גלי", -28, 156.2));
