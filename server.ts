@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express');
 
 setTimeout( () => {
-  const plugins = require('./src/app/server.plugins');
+  //const plugins = require('./src/app/server.plugins');
   var app = express();
   // If an incoming request uses
   // a protocol other than HTTPS,
