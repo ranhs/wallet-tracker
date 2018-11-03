@@ -9,7 +9,7 @@ export class TransactionStorageService {
 
   getTransactions(startDate : Date, endDate : Date) : Promise<WalletTransaction[]> {
     return new Promise<WalletTransaction[]>((resolve, reject) => {
-      var rv = this.http.get('/transactions').subscribe( (data : {id:number, date: Date, description: string, value: number, total: number}[] ) => {
+      var rv = this.http.get('/transactions').subscribe( (data : {id:number, date: {year: number, month: number, day: number}, description: string, value: number, total: number}[] ) => {
         var transactions : WalletTransaction[] = [];
         for ( var trans of data ) {
           console.log('trans', trans);
