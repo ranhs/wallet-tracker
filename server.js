@@ -1,8 +1,8 @@
 const path = require('path');
 const express = require('express');
-//const plugins = require('./src/app/server.plugins');
 
 setTimeout( () => {
+  const plugins = require('./src/app/server.plugins');
   var app = express();
   // If an incoming request uses
   // a protocol other than HTTPS,
