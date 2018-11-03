@@ -9,7 +9,9 @@ export class TransactionStorageService {
 
   getTransactions(startDate : Date, endDate : Date) : Promise<WalletTransaction[]> {
     return new Promise<WalletTransaction[]>((resolve, reject) => {
-      var rv = this.http.get('/transactions');
+      var rv = this.http.get('/transactions').subscribe( (data) => {
+        console.log('data=', data);
+      });
       console.log('get returned', rv);
       var dummyTransactions : WalletTransaction[] = [];
       dummyTransactions.push(new WalletTransaction(1, new Date(2018,8-1,31), "יתרה קודמת", 184.2, 184.2));
