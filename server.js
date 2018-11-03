@@ -1,6 +1,6 @@
-
 const path = require('path');
 const express = require('express');
+const plugins = require('./src/app/server.plugins');
 const app = express();
 
 // If an incoming request uses
@@ -27,9 +27,7 @@ app.use(forceSSL());
 // in the dist directory
 app.use(express.static(__dirname + '/dist'));
 
-app.get('/transactions', function(req, res) {
-  res.send('Hello World!');
-});
+plugins.plugin(app);
 
 // For all GET requests, send back index.html
 // so that PathLocationStrategy can be used
