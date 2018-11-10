@@ -1,16 +1,25 @@
 #value-input{
     background-color: #e1e1e1;
     display: grid;
-    grid-template-columns: 105px auto;
+    grid-template-columns: auto 105px ;
     padding: 20px;
+    position: relative;
 
+    #length-reference, input{
+        position: absolute;
+    }
+    #length-reference{
+        opacity: 0;
+        font-size: 40px;
+        z-index: -1;
+    }
     input{
-        text-align: right;
-        direction: rtl;
-        float:right;
+        text-align: left;
+        direction: ltr;
+        float: left;
 
         font-size: 40px;
-        max-width: 180px;
+        width: 100%;
         border: none;
         background-color: transparent;
 
@@ -22,18 +31,20 @@
         outline-width: 0;
     }
     #currency-symbol{
-        float:right;
         color: #d33c2d;
         font-size: 30px;
+        position: absolute;
+        left: 50px;
+        padding-top: 8px; margin-left: 3px;
     }
 
     .switch {
-        display: inline-block;
         width: 50px;
         height: 25px;
         border-radius: 3px;
         background-color: rgb(237, 28, 36);
         margin: 10px 0;
+        margin-left: 50px;
 
         .switch-front{
             display: inline-block;

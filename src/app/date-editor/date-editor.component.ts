@@ -30,9 +30,59 @@ export class DateEditorComponent implements ControlValueAccessor  {
   }
 
   public get dateStr() : string {
-    var value : Date = this.innerValue;
-    if ( !value ) return '';
-    return `${this.dd(value.getDate())}/${this.dd(value.getMonth()+1)}/${value.getFullYear()}`;
+    var date : Date = this.innerValue;
+    var dateStr : string = '';
+    // if ( !value ) return '';
+    //return `${this.dd(value.getDate())}/${this.dd(value.getMonth()+1)}/${value.getFullYear()}`;
+  
+    var month : string;
+    console.log(date.getMonth());
+    switch(date.getMonth()){
+      case 1:
+        month = "ינו";
+        break;
+      case 2:
+        month = "פבר";
+        break;
+      case 3:
+        month = "מרץ";
+        break;
+      case 4: 
+        month = "אפר";
+        break;
+      case 5: 
+        month = "מאי";
+        break;
+      case 6: 
+        month = "יוני";
+        break;
+      case 7: 
+        month = "יולי";
+        break;
+      case 8: 
+        month = "אוג";
+        break;
+      case 9: 
+        month = "ספט";
+        break;
+      case 10: 
+        month = "אוקט";
+        break;
+      case 11: 
+        month = "נוב";
+        break;
+      case 12: 
+        month = "דצמ";
+        break;
+    }
+
+    dateStr += `${date.getDay()}`;
+    dateStr += " ";
+    dateStr += month;
+    dateStr += " ";
+    dateStr += `${date.getFullYear()}`;
+
+    return dateStr;
   }
 
   private onValueChange() {
