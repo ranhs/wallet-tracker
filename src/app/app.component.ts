@@ -14,9 +14,9 @@ export class AppComponent implements OnInit{
   
   ngOnInit(){
     //document ready function
-    $(function(){
-      AppComponent.scrollContentToBottom(); //initialize the scrolling to bottom
-    });
+  //  $(function(){
+  //    AppComponent.scrollContentToBottom(); //initialize the scrolling to bottom
+  //  });
   }
 
   //this function needs to be called whenever we add an item to the list

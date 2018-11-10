@@ -1,6 +1,9 @@
 const path = require('path');
 const express = require('express');
 const plugins = require('./src/server/plugin');
+var cors = require('cors');
+
+const port = process.env.PORT || 8080;
 
 var app = express();
 // If an incoming request uses
@@ -21,7 +24,10 @@ const forceSSL = function() {
 // Instruct the app
 // to use the forceSSL
 // middleware
-app.use(forceSSL());
+if ( port == 8080 )
+  app.use(cors());
+else
+  app.use(forceSSL());
 
 // Run the app by serving the static files
 // in the dist directory
@@ -31,10 +37,11 @@ plugins.plugin(app);
 
 // For all GET requests, send back index.html
 // so that PathLocationStrategy can be used
-app.get('/*', function(req, res) {
+app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/dist/index.html'));
 });
 
 // Start the app by listening on the default
 // Heroku port
-app.listen(process.env.PORT || 8080);
+app.listen(port);
+console.log(`listenning on port ${port}`);
