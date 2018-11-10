@@ -9,10 +9,10 @@ export class LoginComponent implements OnInit {
 
   constructor() { }
 
-  private host : string = "host";
-  private user : string = "user";
-  private password: string = "password";
-  private database: string = "database";
+  public host : string = "host";
+  public user : string = "user";
+  public password: string = "password";
+  public database: string = "database";
 
   ngOnInit() {
     this.host = localStorage.getItem("wallet-host")
