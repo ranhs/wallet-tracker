@@ -1,7 +1,6 @@
 import { Component, forwardRef, ChangeDetectorRef, OnInit  } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { $ } from 'jquery';
-import {  } from '';
 
 export const CURRENCY_INPUT_CONTROL_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
@@ -38,7 +37,7 @@ export class CurrencyInputComponent implements ControlValueAccessor, OnInit {
 
         
     }
-    private valuechange(newValue){
+    public valuechange(newValue){
         this.value = newValue; 
         
         //we need to use TimeOut so the value will change first, before we update the input-length
@@ -115,7 +114,7 @@ export class CurrencyInputComponent implements ControlValueAccessor, OnInit {
         }
     }
 
-    private onKeyPress($event) {
+    public onKeyPress($event) {
         if ( !this.isValidKey($event.key, $event.srcElement.value, $event.srcElement.selectionStart, $event.srcElement.selectionEnd - $event.srcElement.selectionStart) )
             $event.preventDefault();
 
@@ -135,14 +134,14 @@ export class CurrencyInputComponent implements ControlValueAccessor, OnInit {
         this.onTouchedCallback = fn;
     }
 
-    private onFocus(){
+    public onFocus(){
         if (this._value == 0 ){
             this._value = undefined;
             this.inputLength = 0;
         }
 
     }
-    private onFocusOut(){
+    public onFocusOut(){
         if (!this._value){
             this._value = 0;
 

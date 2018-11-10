@@ -32,11 +32,9 @@ export class DateEditorComponent implements ControlValueAccessor  {
   public get dateStr() : string {
     var date : Date = this.innerValue;
     var dateStr : string = '';
-    // if ( !value ) return '';
-    //return `${this.dd(value.getDate())}/${this.dd(value.getMonth()+1)}/${value.getFullYear()}`;
-  
     var month : string;
-    console.log(date.getMonth());
+
+    if ( !date ) return '';
     switch(date.getMonth()){
       case 1:
         month = "ינו";
