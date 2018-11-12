@@ -1,4 +1,5 @@
 import * as mysql from 'mysql';
+import {Promise} from 'es6-promise';
 
 export class DbInfo  {
     constructor (

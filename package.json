@@ -1,6 +1,6 @@
 {
   "name": "wallet-tracker",
-  "version": "0.0.33",
+  "version": "0.0.34",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -28,6 +28,7 @@
     "@angular/platform-browser": "^5.2.0",
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
+    "@types/es6-promise": "^3.3.0",
     "@types/express": "^4.16.0",
     "@types/mysql": "^2.15.5",
     "core-js": "^2.4.1",
