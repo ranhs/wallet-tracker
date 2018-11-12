@@ -5,17 +5,27 @@ import { WalletTransaction } from './wallet.transaction';
 
 @Injectable()
 export class TransactionStorageService {
+  private host: string;
+  private user: string;
+  private password: string;
+  private database: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    this.host = localStorage.getItem("wallet-host")
+    this.user = localStorage.getItem("wallet-user")
+    this.password = localStorage.getItem("wallet-password")
+    this.database = localStorage.getItem("wallet-database")
+  }
 
   private apiUrl(path : string) : string{
+    var url : string = path;
     if ( location.host === "localhost:4200" )
     {
       // servered from local ng serve
-      return `http://localhost:8080${path}`;
-    } else {
-      return path;
-    }
+      url = `http://localhost:8080${path}`;
+    } 
+    url = `${url}?host=${this.host}&user=${this.user}&password=${this.password}&database=${this.database}`;
+    return url;
   }
 
   getTransactions(startDate : Date, endDate : Date) : Promise<WalletTransaction[]> {
