@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "tsc src/server/plugin.ts & tsc src/server/walletDB.ts & node server.js",
+    "start": "tsc src/server/plugin.ts && tsc src/server/walletDB.ts && node server.js",
     "build": "ng build",
     "postinstall": "ng build --aot -prod",
     "test": "ng test",
