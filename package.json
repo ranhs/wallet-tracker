@@ -1,12 +1,12 @@
 {
   "name": "wallet-tracker",
-  "version": "0.0.32",
+  "version": "0.0.33",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "tsc src/server/plugin.ts && tsc src/server/walletDB.ts && node server.js",
+    "start": "node server.js",
     "build": "ng build",
-    "postinstall": "ng build --aot -prod",
+    "postinstall": "ng build --aot -prod && tsc src/server/plugin.ts && tsc src/server/walletDB.ts",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
