@@ -6,12 +6,12 @@
     
     <!--application table-->
     <div id="content">
-        <app-wallet-table *ngIf="true"></app-wallet-table>
+        <app-wallet-table *ngIf="true" (addNew)="onAddNew($event)" [addTransaction]="transactionToAdd" [canEdit]="!showEditComponent"></app-wallet-table>
     </div>
     
     <!--To do: wallet-action-->
     <!--Note only one of the two "add banner" and "walle-action" should be visible at the same time-->
-    <wallet-action *ngIf="false"></wallet-action> <!--remove display none to display wallat-action-->
+    <wallet-action *ngIf="showEditComponent" [initTransaction]="initTransaction" [isNew]="true" (save)="onTransactionSaved($event)"></wallet-action> <!--remove display none to display wallat-action-->
 
     <app-login *ngIf="false"></app-login>
     <!--Add new button-->

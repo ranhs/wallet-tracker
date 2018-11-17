@@ -19,12 +19,12 @@
     <div class="row" style="padding-top: 10px; padding-bottom: 10px;">
         <div style="grid-column-start: 2; font-size: 22px; text-align: left;">
             <span>יתרה: </span>
-            <span dir="ltr">{{valueChange}}</span>
+            <span dir="ltr">{{total}}</span>
         </div>
     </div>
 
     <div id="buttons">
-        <button class="save">שמור</button>
+        <button class="save" (click)="onSaveClicked()">{{saveText}}</button>
         <button class="cancel">בטל</button>
     </div>
 </div>

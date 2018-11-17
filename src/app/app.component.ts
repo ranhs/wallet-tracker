@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { $ } from 'jquery';
+import { WalletTransaction } from './wallet.transaction';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,9 @@ import { $ } from 'jquery';
 export class AppComponent implements OnInit{
   title = 'app';
   public valueChange : number = 12.3;
+  public showEditComponent = false;
+  public initTransaction : WalletTransaction = undefined;
+  public transactionToAdd : WalletTransaction = undefined;
 
   constructor(){}
   
@@ -19,14 +23,21 @@ export class AppComponent implements OnInit{
     // });
   }
 
+  onAddNew(newTransaction : WalletTransaction) {
+    this.initTransaction = newTransaction;
+    this.showEditComponent = true;
+  }
+
   //this function needs to be called whenever we add an item to the list
   static scrollContentToBottom(){
     let $content = $("#content");
     $content.scrollTop($content.height());
     console.log($content.scrollTop());
-    
   }
 
-
-
+  public onTransactionSaved(trans : WalletTransaction) {
+    this.transactionToAdd = trans;
+    this.showEditComponent = false;
+    this.initTransaction = undefined;
+  }
 }

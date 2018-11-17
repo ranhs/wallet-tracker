@@ -35,7 +35,7 @@ export class DateEditorComponent implements ControlValueAccessor  {
     var month : string;
 
     if ( !date ) return '';
-    switch(date.getMonth()){
+    switch(date.getMonth()+1){
       case 1:
         month = "ינו";
         break;
@@ -74,7 +74,7 @@ export class DateEditorComponent implements ControlValueAccessor  {
         break;
     }
 
-    dateStr += `${date.getDay()}`;
+    dateStr += `${date.getDate()}`;
     dateStr += " ";
     dateStr += month;
     dateStr += " ";
