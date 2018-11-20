@@ -40,4 +40,10 @@ export class AppComponent implements OnInit{
     this.showEditComponent = false;
     this.initTransaction = undefined;
   }
+
+  public onEditCancel() {
+    this.transactionToAdd = undefined;
+    this.showEditComponent = false;
+    this.initTransaction = undefined;
+  }
 }

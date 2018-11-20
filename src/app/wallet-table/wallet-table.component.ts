@@ -15,6 +15,7 @@ export class WalletTableComponent implements OnInit {
     if ( value !== undefined && value.id >= this.nextId ) {
       this.transactions.push(value);
       this.nextId = Math.max(this.nextId, value.id + 1);
+      this.transactionStorageSrv.insertTransaction(value);
     }
   }
   @Input() public canEdit: boolean;

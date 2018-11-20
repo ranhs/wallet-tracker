@@ -12,6 +12,7 @@ export class WalletActionComponent {
     @Input() public initTransaction: WalletTransaction;
     @Input() public isNew: boolean;
     @Output() public save: EventEmitter<WalletTransaction> = new EventEmitter<WalletTransaction>();
+    @Output() public cancel: EventEmitter<any> = new EventEmitter<any>();
     private baseValue : number;
     public minDate: Date;
     public maxDate: Date;
@@ -59,5 +60,9 @@ export class WalletActionComponent {
     public onSaveClicked() {
         let trans = new WalletTransaction(this.initTransaction.id, this.date, this.description, this.valueChange, this.total);
         this.save.emit(trans);
+    }
+
+    public onCancelClicked() {
+        this.cancel.emit(undefined);
     }
 }
