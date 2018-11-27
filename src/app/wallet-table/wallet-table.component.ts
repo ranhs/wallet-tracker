@@ -13,7 +13,24 @@ export class WalletTableComponent implements OnInit {
   @Output() public addNew : EventEmitter<WalletTransaction> = new EventEmitter<WalletTransaction>();
   @Input() public set addTransaction(value: WalletTransaction) {
     if ( value !== undefined && value.id >= this.nextId ) {
-      this.transactions.push(value);
+      // look where to add this transactions:
+      let insertAfterIndex = this.transactions.length-1;
+      let transactionsToUpdate : WalletTransaction[] = [];
+      while ( value.date < this.transactions[insertAfterIndex].date ) {
+        this.transactions[insertAfterIndex].rename(this.transactions[insertAfterIndex].id+1);
+        this.transactions[insertAfterIndex].adjustTotal(value.value);
+        transactionsToUpdate.push(this.transactions[insertAfterIndex]);
+        insertAfterIndex--;
+        if ( insertAfterIndex < 0 ) break;
+      }
+      if ( transactionsToUpdate.length > 0 ) {
+        value.rename((insertAfterIndex>=0)?this.transactions[insertAfterIndex].id +1 : 1);
+        value.adjustTotal(-value.total + ((insertAfterIndex>=0)?this.transactions[insertAfterIndex].total:0) + value.value);
+        this.transactions.splice(insertAfterIndex+1, 0, value);
+        this.transactionStorageSrv.updateTransactions(transactionsToUpdate);
+      } else {
+        this.transactions.push(value);
+      }
       this.nextId = Math.max(this.nextId, value.id + 1);
       this.transactionStorageSrv.insertTransaction(value);
     }

@@ -1,5 +1,5 @@
 import * as mysql from 'mysql';
-import {Promise} from 'es6-promise';
+import {Promise, polyfill} from 'es6-promise';
 
 export class DbInfo  {
     constructor (
@@ -16,7 +16,8 @@ export class Transaction  {
         public date: {year : number, month : number, day : number}, 
         public description : string, 
         public value : number, 
-        public total : number) {
+        public total : number,
+        public prev_id: number = undefined) {
     }
 }
 
@@ -27,7 +28,7 @@ export class WalletDB {
     public static getTransactions(dbInfo : DbInfo) : Promise<Transaction[]> {
         var pool = mysql.createPool(dbInfo);
         return new Promise<Transaction[]>( (resolve, reject) => {
-            pool.query("SELECT * FROM WalletTransactions", (error, result) => {
+            pool.query("SELECT * FROM WalletTransactions ORDER BY id", (error, result) => {
                 if ( error ) {
                     reject(error);
                 } else {
@@ -62,6 +63,35 @@ export class WalletDB {
                     resolve(trans);
                 }
             });
+        });
+    }
+
+    public static Update(dbInfo: DbInfo, transactions : Transaction[]) : Promise<number> {
+        if ( !dbInfo || !transactions || transactions.length === 0 ) return;
+        var pool = mysql.createPool(dbInfo);
+        return new Promise<number> ( (resolve, reject) => {
+            var _update  = ( transactions : Transaction[] ) : void => {
+                if ( transactions.length === 0 ) {
+                    return resolve(0);
+                }
+                let trans = transactions[0];
+                pool.query(`UPDATE WalletTransactions
+                            SET id=${trans.id},
+                                date='${trans.date.year}-${trans.date.month}-${trans.date.day}',
+                                description='${trans.description}',
+                                value=${trans.value},
+                                balance=${trans.total}
+                            WHERE id=${trans.prev_id ? trans.prev_id : trans.id}`, 
+                (error) => {
+                    if ( error ) {
+                        reject(error);
+                    } else {
+                        _update( transactions.splice(1, transactions.length-1) );
+                    }
+                });
+                
+            };
+            _update(transactions);
         });
     }
 }

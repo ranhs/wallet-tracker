@@ -32,7 +32,6 @@ export class AppComponent implements OnInit{
   static scrollContentToBottom(){
     let $content = $("#content");
     $content.scrollTop($content.height());
-    console.log($content.scrollTop());
   }
 
   public onTransactionSaved(trans : WalletTransaction) {

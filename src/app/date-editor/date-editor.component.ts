@@ -96,7 +96,7 @@ export class DateEditorComponent implements ControlValueAccessor  {
   private set innerValue(value: Date) {
     if ( this._innerValue !== value ) {
       this._innerValue = value;
-      this.onValueChange;
+      this.onValueChange();
     }
   }
 

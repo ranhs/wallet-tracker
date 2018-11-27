@@ -54,7 +54,8 @@ export class WalletActionComponent {
     }
 
     public get total() : number {
-        return Math.round((this.baseValue + this.valueChange) *10 ) / 10;
+        let total = Math.round((1*this.baseValue + 1*this.valueChange) *10 ) / 10;
+        return total;
     }
 
     public onSaveClicked() {

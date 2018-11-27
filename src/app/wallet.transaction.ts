@@ -42,4 +42,19 @@ export class WalletTransaction {
     public get total() : number {
         return this._total;
     }
+
+    private _prev_id : number = undefined;
+
+    public get prev_id() : number {
+        return this._prev_id;
+    }
+
+    public rename(new_id : number) {
+        this._prev_id = this.id;
+        this._id = new_id;
+    }
+
+    public adjustTotal(gap: number) {
+        this._total += gap;
+    }
 }
