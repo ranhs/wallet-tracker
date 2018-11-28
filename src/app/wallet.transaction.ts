@@ -56,5 +56,6 @@ export class WalletTransaction {
 
     public adjustTotal(gap: number) {
         this._total += gap;
+        this._total = Math.round(this._total * 10) / 10;
     }
 }

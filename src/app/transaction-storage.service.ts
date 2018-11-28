@@ -43,29 +43,10 @@ export class TransactionStorageService {
     });
   }
 
-  insertTransaction(trans: WalletTransaction) {
-    var rv = this.http.post<HttpWalletTransaction>(this.apiUrl('/transactions'), {
-      id : trans.id,
-      date: {
-        year: trans.date.getFullYear(),
-        month: trans.date.getMonth() +1,
-        day: trans.date.getDate()
-      },
-      description: trans.description,
-      value: trans.value,
-      total: trans.total
-    }).subscribe((data:HttpWalletTransaction)=>{
-      //console.log('post successed', data);
-    }, (error) => {
-      console.log('post failed', error);
-    })
-  }
-
-  updateTransactions(transactions: WalletTransaction[]) {
-    var httpTrans : HttpWalletTransaction[] = [];
-    for ( var trans of transactions ) {
-      httpTrans.push( {
-        id: trans.id,
+  insertTransaction(trans: WalletTransaction) : Promise<WalletTransaction> {
+    return new Promise<WalletTransaction>( (resolve, reject) => {
+      var rv = this.http.post<HttpWalletTransaction>(this.apiUrl('/transactions'), {
+        id : trans.id,
         date: {
           year: trans.date.getFullYear(),
           month: trans.date.getMonth() +1,
@@ -73,18 +54,45 @@ export class TransactionStorageService {
         },
         description: trans.description,
         value: trans.value,
-        total: trans.total,
-        prev_id: trans.prev_id
-      });
-    }
-    /*
-    var rv = this.http.put<HttpWalletTransaction[]>(this.apiUrl('/transactions'), httpTrans).subscribe(()=>{
-      //console.log('put successed');
-    }, (error) => {
-      console.log('post failed', error);
+        total: trans.total
+      }).subscribe((data:HttpWalletTransaction)=>{
+        resolve(new WalletTransaction(
+          data.id, 
+          new Date(data.date.year, data.date.month-1, data.date.day),
+          data.description,
+          data.value,
+          data.total));
+      }, (error) => {
+        console.log('post failed', error);
+        reject(error);
+      })
     });
-    */
-   console.log('put', JSON.stringify(httpTrans,undefined,2));
+  }
+
+  updateTransactions(transactions: WalletTransaction[]) : Promise<any> {
+    return new Promise<any> ( (resolve, reject) => {
+      var httpTrans : HttpWalletTransaction[] = [];
+      for ( var trans of transactions ) {
+        httpTrans.push( {
+          id: trans.id,
+          date: {
+            year: trans.date.getFullYear(),
+            month: trans.date.getMonth() +1,
+            day: trans.date.getDate()
+          },
+          description: trans.description,
+          value: trans.value,
+          total: trans.total,
+          prev_id: trans.prev_id
+        });
+      }
+      this.http.put<HttpWalletTransaction[]>(this.apiUrl('/transactions'), httpTrans).subscribe(()=>{
+        resolve(undefined);
+      }, (error) => {
+        console.log('post failed', error);
+        reject(undefined);
+      });
+    });
   }
 
 }

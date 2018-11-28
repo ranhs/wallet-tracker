@@ -27,12 +27,17 @@ export class WalletTableComponent implements OnInit {
         value.rename((insertAfterIndex>=0)?this.transactions[insertAfterIndex].id +1 : 1);
         value.adjustTotal(-value.total + ((insertAfterIndex>=0)?this.transactions[insertAfterIndex].total:0) + value.value);
         this.transactions.splice(insertAfterIndex+1, 0, value);
-        this.transactionStorageSrv.updateTransactions(transactionsToUpdate);
+        this.transactionStorageSrv.updateTransactions(transactionsToUpdate).then( () => {
+          this.nextId = Math.max(this.nextId, value.id + 1);
+          this.transactionStorageSrv.insertTransaction(value);
+        }, (e) => {
+          console.log('failed to update, ignoring inserting');
+        });
       } else {
         this.transactions.push(value);
+        this.nextId = Math.max(this.nextId, value.id + 1);
+        this.transactionStorageSrv.insertTransaction(value);
       }
-      this.nextId = Math.max(this.nextId, value.id + 1);
-      this.transactionStorageSrv.insertTransaction(value);
     }
   }
   @Input() public canEdit: boolean;
