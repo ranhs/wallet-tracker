@@ -40,4 +40,14 @@ export function plugin(app) {
             res.status(400).send(error);
         });
     });
+
+    app.delete('/transactions/:id', (req, res) => {
+        var url_parts : url.Url = url.parse(req.url, true);
+        var dbInfo = new DbInfo(url_parts.query.host, url_parts.query.user, url_parts.query.password, url_parts.query.database);
+        WalletDB.delete(dbInfo, req.params.id).then( (transaction) => {
+            res.send(transaction);
+        }, (error) => {
+            res.status(400).send(error);
+        });
+    })
 }

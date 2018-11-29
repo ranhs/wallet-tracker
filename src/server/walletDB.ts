@@ -94,4 +94,32 @@ export class WalletDB {
             _update(transactions);
         });
     }
+
+    public static delete(dbInfo: DbInfo, id : number) : Promise<Transaction> {
+        if ( !dbInfo || !id ) return;
+        var pool = mysql.createPool(dbInfo);
+        return new Promise<Transaction> ((resolve, reject) => {
+            pool.query(`SELECT * from WalletTransactions where id=${id}`, 
+            (error, result) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    if ( !result || !result.length || result.length !== 1 ) {
+                        reject({ mesage: `id ${id} could not found, or found more than one reuslt`,
+                        result});
+                    }
+
+                    let deletedTransaction = result[0];
+                    pool.query(`DELETE from WalletTransactions where id=${id}`,
+                    (error) => {
+                        if (error) {
+                            reject(error);
+                        } else {
+                            resolve(deletedTransaction);
+                        }
+                    })
+                }
+            })
+        });
+    }
 }
