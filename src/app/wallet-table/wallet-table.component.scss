@@ -1,7 +1,13 @@
+#buttons {
+    display: block;
+    float: top;
+}
 ul{
     margin: 0;
     list-style-type: none;
     padding: 0;
+    height: auto;
+    overflow: auto;
 
     li{
         display: grid;
@@ -31,5 +37,8 @@ ul{
         span.sum.positive{
             color: #007236;
         }
+    }
+    li.trans-select {
+        background-color: yellow;
     }
 }

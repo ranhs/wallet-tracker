@@ -95,6 +95,20 @@ export class TransactionStorageService {
     });
   }
 
+  deleteTransaction(id: number): Promise<WalletTransaction> {
+    return new Promise<WalletTransaction> ( (resolve, reject) => {
+      this.http.delete(this.apiUrl(`/transactions/${id}`)).subscribe((body : HttpWalletTransaction) => {
+        var rv = new WalletTransaction(
+          body.id, 
+          new Date(body.date.year, body.date.month-1, body.date.day),
+          body.description,
+          body.value,
+          body.total);
+        resolve(rv);
+      }, (error) => reject(error));
+    });
+  }
+
 }
 
 interface HttpWalletTransaction {

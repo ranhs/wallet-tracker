@@ -1,5 +1,7 @@
+
+
 <ul>
-  <li *ngFor="let t of transactions">
+  <li *ngFor="let t of transactions" (click)="select(t)" [class]="(isSelected(t))?'trans-select':'trans-unselect'">
     <div>
       <span class="sum" [class.positive]="t.value > 0">{{t.displayValue}}</span>
       <span class="left">{{t.total}}</span>
@@ -8,6 +10,10 @@
       <span class="title">{{t.description}}</span>
       <span class="date">{{t.displayDate}}</span>
     </div>
-  </li>
+    <div id="buttons">
+        <button class="delete" (click)="onDeleteClicked(t)" *ngIf="isSelected(t) > 0 && canEdit">מחק</button>
+        <button class="edit" (click)="onEditClicked(t)" *ngIf="isSelected(t) > 0 && canEdit">ערוך</button>
+    </div>
+      </li>
 </ul>
 <button (click)="onAddClicked()" *ngIf="canAdd && canEdit">Add...</button>
