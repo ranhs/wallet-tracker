@@ -1,4 +1,4 @@
-<div id="container">
+﻿<div id="container">
     <!--app header-->
     <div id="header" class="banner">
         Wallet Tracker
@@ -6,7 +6,7 @@
     
     <!--application table-->
     <div id="content">
-        <app-wallet-table *ngIf="true" (addNew)="onAddNew($event)" [addTransaction]="transactionToAdd" [canEdit]="!showEditComponent"></app-wallet-table>
+        <app-wallet-table *ngIf="false" (addNew)="onAddNew($event)" [addTransaction]="transactionToAdd" [canEdit]="!showEditComponent"></app-wallet-table>
     </div>
     
     <!--To do: wallet-action-->
@@ -15,7 +15,7 @@
 
     <app-login *ngIf="false"></app-login>
     <!--Add new button-->
-    <a id="add" class="banner" href="/new" *ngIf="false"> <!--put here dispaly: none, before dispalying the "wallet-action" part.-->
+    <a id="add" class="banner" href="/new" *ngIf="true"> <!--put here dispaly: none, before dispalying the "wallet-action" part.-->
     הוסף
     </a>
 </div>
