@@ -10,6 +10,8 @@ import { DateEditorComponent } from './date-editor/date-editor.component';
 import { WalletTableComponent } from './wallet-table/wallet-table.component';
 import { TransactionStorageService } from './transaction-storage.service';
 import { LoginComponent } from './login/login.component';
+import { AppRoutingModule } from './app-routing.module';
+import { WalletTrackerComponent } from './wallet-tracker/wallet-tracker.component';
 
 
 
@@ -20,12 +22,14 @@ import { LoginComponent } from './login/login.component';
     CurrencyInputComponent,
     DateEditorComponent,
     WalletTableComponent,
-    LoginComponent
+    LoginComponent,
+    WalletTrackerComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [TransactionStorageService],
   bootstrap: [AppComponent]

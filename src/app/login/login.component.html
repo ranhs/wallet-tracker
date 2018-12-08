@@ -1,6 +1,46 @@
-<h1>Login Details</h1>
-<span>Host: </span><input  [(ngModel)]="host"><br>
-<span>User: </span><input  [(ngModel)]="user"><br>
-<span>Password: </span><input type="password" [(ngModel)]="password"><br>
-<span>Database: </span><input  [(ngModel)]="database"><br>
-<button (click)="onSaveClicked()">Save</button>
+<div id="container">
+  <!--app header-->
+  <div id="header" class="banner">
+    Login Details
+  </div>
+
+  <div class="row">
+    <div class="label">
+        Host
+    </div>
+    <div> 
+        <input [(ngModel)]="host" type="text" style="width: 100%">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="label">
+        User
+    </div>
+    <div> 
+        <input [(ngModel)]="user" type="text" style="width: 100%">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="label">
+        Password
+    </div>
+    <div> 
+        <input [(ngModel)]="password" type="password" style="width: 100%">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="label">
+        Database
+    </div>
+    <div> 
+        <input [(ngModel)]="database" type="text" style="width: 100%">
+    </div>
+  </div>
+
+  <div id="buttons">
+    <button class="save" (click)="onSaveClicked()">Save</button>
+  </div>
+</div>
