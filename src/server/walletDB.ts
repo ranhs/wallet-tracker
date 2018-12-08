@@ -25,6 +25,16 @@ export class WalletDB {
     constructor() {
     }
 
+    private static sqlStr(txt: string) : string {
+        let parts = txt.split("'");
+        if ( parts.length <= 1 ) return txt;
+        txt = parts[0];
+        for (let i=1; i<parts.length; i++) {
+            txt = `${txt}\\'${parts[i]}`;
+        }
+        return txt;
+    }
+
     public static getTransactions(dbInfo : DbInfo) : Promise<Transaction[]> {
         var pool = mysql.createPool(dbInfo);
         return new Promise<Transaction[]>( (resolve, reject) => {
@@ -55,7 +65,7 @@ export class WalletDB {
         var date = new Date(trans.date.year, trans.date.month-1, trans.date.day);
         return new Promise<Transaction>( (resolve, reject) => {
             pool.query(`INSERT INTO WalletTransactions (id, date, description, value, balance)  
-            VALUES (${trans.id}, '${trans.date.year}-${trans.date.month}-${trans.date.day}' ,'${trans.description}',${trans.value},${trans.total})`, 
+            VALUES (${trans.id}, '${trans.date.year}-${trans.date.month}-${trans.date.day}' ,'${WalletDB.sqlStr(trans.description)}',${trans.value},${trans.total})`, 
             (error, result) => {
                 if ( error ) {
                     reject(error);
@@ -78,7 +88,7 @@ export class WalletDB {
                 pool.query(`UPDATE WalletTransactions
                             SET id=${trans.id},
                                 date='${trans.date.year}-${trans.date.month}-${trans.date.day}',
-                                description='${trans.description}',
+                                description='${WalletDB.sqlStr(trans.description)}',
                                 value=${trans.value},
                                 balance=${trans.total}
                             WHERE id=${trans.prev_id ? trans.prev_id : trans.id}`, 
