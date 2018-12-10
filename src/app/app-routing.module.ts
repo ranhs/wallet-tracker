@@ -4,7 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { WalletTrackerComponent } from './wallet-tracker/wallet-tracker.component';
 
 const routes : Routes = [
-  { path: '', component: LoginComponent/*component: WalletTrackerComponent*/ },
+  { path: '', component: WalletTrackerComponent },
   { path: 'login', component: LoginComponent }
 ]
 
