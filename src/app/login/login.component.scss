@@ -3,6 +3,10 @@
     display: grid;
     grid-template-rows: 57px auto auto;
 
+    .link {
+        float: right;
+    }
+
     .banner{
         background-color: #0072bc;
         color: #e1e1e1;
