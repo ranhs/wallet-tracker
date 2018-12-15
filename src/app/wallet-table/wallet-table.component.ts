@@ -12,6 +12,7 @@ export class WalletTableComponent implements OnInit {
   public transactions : WalletTransaction[] = [];
   public selected_id : number = 0;
   @Output() public addNew : EventEmitter<WalletTransaction> = new EventEmitter<WalletTransaction>();
+  @Output() public edit : EventEmitter<WalletTransaction> = new EventEmitter<WalletTransaction>();
   @Input() public set addTransaction(value: WalletTransaction) {
     if ( value !== undefined && value.id >= this.nextId ) {
       // look where to add this transactions:
@@ -28,9 +29,12 @@ export class WalletTableComponent implements OnInit {
         value.rename((insertAfterIndex>=0)?this.transactions[insertAfterIndex].id +1 : 1);
         value.adjustTotal(-value.total + ((insertAfterIndex>=0)?this.transactions[insertAfterIndex].total:0) + value.value);
         this.transactions.splice(insertAfterIndex+1, 0, value);
+        this.saving = true;
         this.transactionStorageSrv.updateTransactions(transactionsToUpdate).then( () => {
           this.nextId = Math.max(this.nextId, value.id + 1);
-          this.transactionStorageSrv.insertTransaction(value);
+          this.transactionStorageSrv.insertTransaction(value).then ( () => {
+            this.saving = false;
+          })
         }, (e) => {
           console.log('failed to update, ignoring inserting');
         });
@@ -41,9 +45,81 @@ export class WalletTableComponent implements OnInit {
       }
     }
   }
+  @Input() public set updateTransaction(value: WalletTransaction) {
+    if ( value !== undefined && value.id === this.selected_id ) {
+      // find the index of the selected item
+      let update_index = undefined;
+      for (let i=this.transactions.length-1; i>0; i--) {
+        if ( this.transactions[i].id == this.selected_id ) {
+          update_index = i;
+          break;
+        }
+      }
+      if ( !update_index ) return;
+      // move selected item up, if need to
+      while ( this.transactions[update_index-1].date > value.date && update_index > 1) {
+        this.transactions[update_index] = this.transactions[update_index-1];
+        update_index--;
+      }
+      // update the transaction
+      this.transactions[update_index] = value;
+      // move selected item down, if need to
+      let down_index = update_index;
+      while ( down_index < this.transactions.length - 1 && this.transactions[down_index+1].date <= value.date) {
+        this.transactions[down_index] = this.transactions[down_index+1];
+        this.transactions[++down_index] = value;
+      }
+      // fix id and total from the updated transaction and forwared
+      var prev : WalletTransaction;
+      var current : WalletTransaction;
+      let transactionsToUpdate : WalletTransaction[] = [];
+      let newSelectedId = undefined;
+      while ( 
+         update_index < this.transactions.length && 
+         (prev = this.transactions[update_index-1]) &&
+         (current = this.transactions[update_index]) &&
+         (current.id !== prev.id + 1 || current.total !== Math.round(10*(prev.total+current.value))/10)
+      ) {
+           current.rename(prev.id+1);
+           current.adjustTotal(Math.round(10*(prev.total-current.total+current.value))/10);
+           transactionsToUpdate.push(current);
+           if ( current.prev_id === this.selected_id ) {
+             newSelectedId = current.id;
+           }
+           update_index++;
+      }
+      if ( newSelectedId ) {
+        this.selected_id = newSelectedId;
+      }
+      if ( transactionsToUpdate.length === 0 ) return;
+      this.saving = true;
+      // temporaray change the id of the first transaction to avoid loop
+      let first_id = transactionsToUpdate[0].id;
+      transactionsToUpdate[0].rename(transactionsToUpdate[0].prev_id);
+      transactionsToUpdate[0].rename(this.nextId);
+      if ( this.selected_id === first_id ) {
+        this.selected_id = this.nextId;
+      }
+      this.transactionStorageSrv.updateTransactions(transactionsToUpdate).then( () => {
+        // reupdate the first transaction id
+        transactionsToUpdate[0].rename(first_id);
+        if ( this.selected_id === this.nextId ) {
+          this.selected_id = first_id;
+        }
+        this.transactionStorageSrv.updateTransactions([transactionsToUpdate[0]]).then( () => {
+          this.saving = false;
+        })
+      })
+
+    }
+  }
   @Input() public canEdit: boolean;
   public canAdd : boolean = false;
+  public saving : boolean = false;
   private nextId : number = 1;
+  public get enableEdit() : boolean {
+    return this.canEdit && !this.saving;
+  }
 
   constructor(private transactionStorageSrv : TransactionStorageService) {
    }
@@ -73,6 +149,7 @@ export class WalletTableComponent implements OnInit {
 }
 
   public onAddClicked() {
+    this.selected_id = 0;
     let newTransaction : WalletTransaction = new WalletTransaction(this.nextId, new Date(), '', 0, this.lastTotal);
     this.addNew.emit(newTransaction);
   }
@@ -100,19 +177,25 @@ export class WalletTableComponent implements OnInit {
     let selected_id = this.selected_id;
     this.transactions.splice(selected_index, 1);
     this.selected_id = 0;
+    this.saving = true;
     this.transactionStorageSrv.deleteTransaction(selected_id).then( () => {
       if ( transactions2update.length > 0 ) {
         this.transactionStorageSrv.updateTransactions(transactions2update).catch( (error) => {
           console.log('failed to update database', error);
+        }).then ( () => {
+          this.saving = false;
         });
+      } else {
+        this.saving = false;
       }
     }, (error) => {
       console.log('failed to delte from database', error);
     })
   }
 
-  public onEditClicked() {
-    console.log("Edit clicked");
+  public onEditClicked(t : WalletTransaction) {
+    if ( !t || t.id !== this.selected_id ) return;
+    this.edit.emit(t);
   }
 
   public isSelected(t : WalletTransaction) : boolean {
@@ -120,7 +203,7 @@ export class WalletTableComponent implements OnInit {
   }
 
   public select( t: WalletTransaction ) : void {
-    console.log(`select ${t.id}`);
+    if (!this.enableEdit) return;
     if ( this.selected_id === t.id ) {
       this.selected_id = 0;
     } else {

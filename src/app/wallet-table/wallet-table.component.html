@@ -11,9 +11,9 @@
       <span class="date">{{t.displayDate}}</span>
     </div>
     <div id="buttons">
-        <button class="delete" (click)="onDeleteClicked(t)" *ngIf="isSelected(t) > 0 && canEdit">מחק</button>
-        <button class="edit" (click)="onEditClicked(t)" *ngIf="isSelected(t) > 0 && canEdit">ערוך</button>
+        <button class="delete" (click)="onDeleteClicked(t)" *ngIf="isSelected(t) > 0 && enableEdit">מחק</button>
+        <button class="edit" (click)="onEditClicked(t)" *ngIf="isSelected(t) > 0 && enableEdit">ערוך</button>
     </div>
       </li>
 </ul>
-<button (click)="onAddClicked()" *ngIf="canAdd && canEdit">Add...</button>
+<button (click)="onAddClicked()" *ngIf="canAdd && enableEdit">Add...</button>

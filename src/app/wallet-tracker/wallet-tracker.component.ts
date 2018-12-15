@@ -13,6 +13,8 @@ export class WalletTrackerComponent implements OnInit {
   public showEditComponent = false;
   public initTransaction : WalletTransaction = undefined;
   public transactionToAdd : WalletTransaction = undefined;
+  public transactionToUpdate : WalletTransaction = undefined;
+  public isNew : boolean = undefined;
 
   constructor(){}
   
@@ -25,6 +27,13 @@ export class WalletTrackerComponent implements OnInit {
 
   onAddNew(newTransaction : WalletTransaction) {
     this.initTransaction = newTransaction;
+    this.isNew = true;
+    this.showEditComponent = true;
+  }
+
+  onEdit(transaction : WalletTransaction) {
+    this.initTransaction = transaction;
+    this.isNew = false;
     this.showEditComponent = true;
   }
 
@@ -35,7 +44,12 @@ export class WalletTrackerComponent implements OnInit {
   }
 
   public onTransactionSaved(trans : WalletTransaction) {
-    this.transactionToAdd = trans;
+    if (this.isNew) {
+      this.transactionToAdd = trans;
+    } else {
+      this.transactionToUpdate = trans;
+    }
+    
     this.showEditComponent = false;
     this.initTransaction = undefined;
   }
