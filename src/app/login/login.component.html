@@ -2,8 +2,22 @@
   <!--app header-->
   <div id="header" class="banner">
     Login Details
-    <a href="/" class="link">0</a>
+    <a href="/" class="link">Login</a>
   </div>
+
+    <div class="row">
+        <div class="label">
+            Name
+        </div>
+        <div> 
+            <select [(ngModel)]="currentName" (change)="onNameSelected()">
+                <option *ngFor="let _userName of names" value="{{_userName}}">{{_userName}}</option>
+                <option value="add">add</option>
+            </select>
+            <input [(ngModel)]="name" type="text" style="width: 100%" (change)="onNameChanged()">
+        </div>
+    </div>
+        
 
   <div class="row">
     <div class="label">
