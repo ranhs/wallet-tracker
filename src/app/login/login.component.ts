@@ -9,7 +9,7 @@ export class LoginComponent implements OnInit {
 
   constructor() { }
 
-  private currentName : string;
+  public currentName : string;
   public users: {[key:string]:UserInfo} = {};
   public name: string = "name";
   private _host : string = "host";
