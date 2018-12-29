@@ -28,6 +28,10 @@ export class WalletTrackerComponent implements OnInit {
     // });
   }
 
+  public get loginName() : string {
+    return this.loginInfoService.name;
+  }
+
   onAddNew(newTransaction : WalletTransaction) {
     this.initTransaction = newTransaction;
     this.isNew = true;
