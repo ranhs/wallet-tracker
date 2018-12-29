@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginInfoService, UserInfo } from '../login-info.service';
 
 @Component({
   selector: 'app-login',
@@ -7,134 +8,79 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private loginInfoService : LoginInfoService) { }
+  public name : string;
   public currentName : string;
-  public users: {[key:string]:UserInfo} = {};
-  public name: string = "name";
-  private _host : string = "host";
-  private _user : string = "user";
-  private _password: string = "password";
-  private _database: string = "database";
-
-
 
   ngOnInit() {
-    this.users = JSON.parse(localStorage.getItem("wallet-users-info"));
-    this._host = localStorage.getItem("wallet-host")
-    this._user = localStorage.getItem("wallet-user")
-    this._password = localStorage.getItem("wallet-password")
-    this._database = localStorage.getItem("wallet-database")
-    if ( this._host == null ) this._host = "host";
-    if ( this._user == null ) this._user = "user";
-    if ( this._password == null ) this._password = "password";
-    if ( this._database == null ) this._database = "database";
-    if ( this.users == null ) {
-      this.users = {};
-      this.users['0'] = {
-        host: this._host,
-        user: this._user,
-        password: this._password,
-        database: this._database
-      };
-    }
-    for (let name in this.users ) {
-      let userInfo = this.users[name];
-      if ( userInfo.host == this._host &&
-           userInfo.user == this._user &&
-           userInfo.password == this._password &&
-           userInfo.database == this._database) {
-             this.currentName = name;
-             this.name = name;
-             break;
-           }
-    }
+    this.name = this.currentName = this.loginInfoService.name;
   }
 
   public get host() : string {
-    return this._host;
+    return this.loginInfoService.host;
   }
   public set host(value: string) {
-    this._host = value;
-    this.users[this.currentName].host = value;
+    this.loginInfoService.host = value;
   }
 
   public get user() : string {
-    return this._user;
+    return this.loginInfoService.user;
   }
   public set user(value: string) {
-    this._user = value;
-    this.users[this.currentName].user = value;
+    this.loginInfoService.user = value;
   }
 
   public get password() : string {
-    return this._password;
+    return this.loginInfoService.password;
   }
   public set password(value: string) {
-    this._password = value;
-    this.users[this.currentName].password = value;
+    this.loginInfoService.password = value;
   }
 
   
   public get database() : string {
-    return this._database;
+    return this.loginInfoService.database;
   }
   public set database(value: string) {
-    this._database = value;
-    this.users[this.currentName].database = value;
+    this.loginInfoService.database = value;
   }
 
 
   public onNameChanged() {
-    let userInfo = this.users[this.currentName];
-    if ( !userInfo ) return;
-    if ( this.currentName == this.name ) return;
-    this.users[this.name] = userInfo;
-    delete this.users[this.currentName];
-    this.currentName = this.name;
+    this.loginInfoService.name = this.name;
+    if ( this.loginInfoService.name !== this.name) {
+      this.name = this.loginInfoService.name;
+    }
   }
 
   public onNameSelected() {
     if ( this.currentName == "add" ) {
-      this.users["name"] = {
+      let newUserInfo : UserInfo = {
         host: this.host,
         user: this.user,
         password: this.password,
         database: this.database
       };
-      this.currentName = "name";
-      this.name = "name"
-      
+      this.loginInfoService.addUser('name', newUserInfo);
+      this.loginInfoService.switchUser('name');
+      this.name = this.currentName = this.loginInfoService.name;
     } else {
-      let user = this.users[this.currentName];
-      if (!user) {
-        this.currentName = this.name;
-        return;
-      }
-      this.name = this.currentName;
-      this.host = user.host;
-      this.user = user.user;
-      this.password = user.password;
-      this.database = user.database;
+      if ( this.currentName === this.loginInfoService.name ) return;
+      this.loginInfoService.switchUser(this.currentName);
+      this.name = this.currentName = this.loginInfoService.name;
     }
   }
 
   public get names() : string[] {
-    return Object.keys(this.users);
+    return this.loginInfoService.names;
   }
 
   public onSaveClicked() {
-    localStorage.setItem("wallet-users-info", JSON.stringify(this.users));
-    localStorage.setItem("wallet-host", this.host);
-    localStorage.setItem("wallet-user", this.user);
-    localStorage.setItem("wallet-password", this.password);
-    localStorage.setItem("wallet-database", this.database);
+    if ( this.name.length === 0 ) {
+      this.loginInfoService.name = "_";
+      this.loginInfoService.removeUser("_");
+    }
+    this.loginInfoService.save();
+    this.name = this.currentName = this.loginInfoService.name;
   }
-}
-
-class UserInfo {
-  public host: string;
-  public user: string;
-  public password: string;
-  public database: string;
 }

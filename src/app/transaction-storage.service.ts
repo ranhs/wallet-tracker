@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { WalletTransaction } from './wallet.transaction';
 import { TagContentType } from '@angular/compiler';
+import { LoginInfoService } from './login-info.service';
 
 
 @Injectable()
@@ -11,11 +12,11 @@ export class TransactionStorageService {
   private password: string;
   private database: string;
 
-  constructor(private http: HttpClient) { 
-    this.host = localStorage.getItem("wallet-host")
-    this.user = localStorage.getItem("wallet-user")
-    this.password = localStorage.getItem("wallet-password")
-    this.database = localStorage.getItem("wallet-database")
+  constructor(private http: HttpClient, private loginInfoService : LoginInfoService) { 
+    this.host = this.loginInfoService.host;
+    this.user = this.loginInfoService.user;
+    this.password = this.loginInfoService.password;
+    this.database = this.loginInfoService.database;
   }
 
   private apiUrl(path : string) : string{

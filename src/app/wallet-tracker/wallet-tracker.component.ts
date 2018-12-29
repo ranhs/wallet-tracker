@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { $ } from 'jquery';
 import { WalletTransaction } from '../wallet.transaction';
+import { LoginInfoService } from '../login-info.service';
 
 @Component({
   selector: 'app-wallet-tracker',
@@ -16,9 +17,11 @@ export class WalletTrackerComponent implements OnInit {
   public transactionToUpdate : WalletTransaction = undefined;
   public isNew : boolean = undefined;
 
-  constructor(){}
+  constructor(private loginInfoService : LoginInfoService){
+  }
   
   ngOnInit(){
+    //console.log( this.loginInfoService.name, this.loginInfoService.userInfo);
     //document ready function
     // $(function(){
     //   AppComponent.scrollContentToBottom(); //initialize the scrolling to bottom

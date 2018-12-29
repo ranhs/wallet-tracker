@@ -12,6 +12,7 @@ import { TransactionStorageService } from './transaction-storage.service';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { WalletTrackerComponent } from './wallet-tracker/wallet-tracker.component';
+import { LoginInfoService } from './login-info.service';
 
 
 
@@ -31,7 +32,10 @@ import { WalletTrackerComponent } from './wallet-tracker/wallet-tracker.componen
     FormsModule,
     AppRoutingModule
   ],
-  providers: [TransactionStorageService],
+  providers: [
+    TransactionStorageService, 
+    LoginInfoService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
