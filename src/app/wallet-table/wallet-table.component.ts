@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { WalletTransaction } from '../wallet.transaction';
-import { TransactionStorageService } from '../transaction-storage.service';
+import { TransactionServiceGen } from '../transaction.service/transection.service.gen';
 
 @Component({
   selector: 'app-wallet-table',
@@ -121,7 +121,7 @@ export class WalletTableComponent implements OnInit {
     return this.canEdit && !this.saving;
   }
 
-  constructor(private transactionStorageSrv : TransactionStorageService) {
+  constructor(private transactionStorageSrv : TransactionServiceGen) {
    }
 
   ngOnInit() {

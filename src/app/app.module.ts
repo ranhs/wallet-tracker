@@ -8,11 +8,13 @@ import { WalletActionComponent } from './walletAction/wallet-action.component';
 import { CurrencyInputComponent } from './currencyInput/currency-input.component';
 import { DateEditorComponent } from './date-editor/date-editor.component';
 import { WalletTableComponent } from './wallet-table/wallet-table.component';
-import { TransactionStorageService } from './transaction-storage.service';
+import { TransactionStorageService } from './transaction.service/transaction-storage.service';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { WalletTrackerComponent } from './wallet-tracker/wallet-tracker.component';
 import { LoginInfoService } from './login-info.service';
+import { TransactionServiceGen } from './transaction.service/transection.service.gen';
+import { TransactionMockService } from './transaction.service/transaction-mock.service';
 
 
 
@@ -33,7 +35,9 @@ import { LoginInfoService } from './login-info.service';
     AppRoutingModule
   ],
   providers: [
-    TransactionStorageService, 
+    TransactionStorageService,
+    TransactionServiceGen, 
+    TransactionMockService, 
     LoginInfoService
   ],
   bootstrap: [AppComponent]
