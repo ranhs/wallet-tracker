@@ -1,41 +1,27 @@
-#container{
-    height: 100vh;
-    display: grid;
-    grid-template-rows: 57px auto auto;
+@import '../../styles/colors';
 
-    .link {
-        float: right;
-    }
+:host {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 57px calc(100vh - 114px) 57px;
+}
 
-    .banner{
-        background-color: #0072bc;
-        color: #e1e1e1;
-        padding: 15px 30px;
-        box-shadow: rgba(0, 0, 0, 0.7) 0px 0px 8px;
-        //position: fixed;
-        //width: 100vw;
-    }
-    .banner#header{
-        //top: 0;
-        height: 23px;
-    }
-    .banner#add{
-        //bottom: 0;
-        text-align: center;
-        direction: rtl;
-        font-size: 25px;
-    }
+.top-bar{
+  background-color: $primary-color;
+  color: $white-text-color;
+  padding: 15px 30px;
+  box-shadow: rgba(0, 0, 0, 0.7) 0 0 8px;
+}
 
-    #content{
-        // padding-top: 53px; //the height of the top header
-        // padding-bottom: 56px; //the height of the bottom button
+.content {
+  overflow: auto;
+}
 
-        height: auto;
-        overflow: auto;
-    }
-    a{
-        text-decoration: none;
-    }
-
-
+.add-button {
+  background-color: $success-color;
+  color: $white-text-color;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

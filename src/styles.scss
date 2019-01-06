@@ -1,20 +1,2 @@
-/* You can add global styles to this file, and also import other style files */
-body{
-    margin: 0;
-    background: #F2F2F2;
-    color: rgb(37, 37, 37);
-    font-family: 'Montserrat', sans-serif;
-    height: 100vh; 
-    font-size: 20px;
-}
-
-input{
-    font-size: 20px;
-    background-color: transparent;
-    border: none;
-    border-bottom: #0072bc 1px solid;
-}
-input:focus{
-    outline-width: 0;
-}
-
+@import 'styles/colors';
+@import 'styles/common';

@@ -1,0 +1,23 @@
+body {
+  margin: 0;
+  background-color: #F2F2F2;
+  color: rgb(37, 37, 37);
+  font-family: 'Montserrat', sans-serif;
+  height: 100vh;
+  font-size: 20px;
+}
+
+a {
+  text-decoration: none;
+}
+
+input{
+  font-size: 20px;
+  background-color: transparent;
+  border: none;
+  border-bottom: #0072bc 1px solid;
+}
+input:focus{
+  outline-width: 0;
+}
+

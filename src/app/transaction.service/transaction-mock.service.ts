@@ -22,7 +22,6 @@ export class TransactionMockService  implements TransactionService {
             t.description,
             t.value,
             t.total);
-        )
     }
 
     async getTransactions(startDate : Date, endDate : Date) : Promise<WalletTransaction[]> {
