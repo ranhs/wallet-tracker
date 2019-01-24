@@ -4,8 +4,6 @@
   margin: 0;
   list-style-type: none;
   padding: 0;
-  height: auto;
-  overflow: auto;
 
   &-row {
     display: grid;
@@ -13,7 +11,7 @@
     padding: 10px 15px;
     border-bottom: $border-color 2px solid;
 
-    .--selected {
+    &.--selected {
       background-color: $highlight-white-color;
     }
 
