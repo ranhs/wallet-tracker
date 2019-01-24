@@ -1,4 +1,4 @@
-import { WalletTransaction } from "../wallet.transaction";
+import { WalletTransaction } from "../../../../utility/wallet.transaction";
 
 export interface TransactionService {
     getTransactions(startDate : Date, endDate : Date) : Promise<WalletTransaction[]>;

@@ -1,4 +1,7 @@
+/**HTML elements defaults**/
+
 body {
+  direction: rtl;
   margin: 0;
   background-color: #F2F2F2;
   color: rgb(37, 37, 37);
@@ -11,13 +14,24 @@ a {
   text-decoration: none;
 }
 
-input{
+input {
   font-size: 20px;
   background-color: transparent;
   border: none;
   border-bottom: #0072bc 1px solid;
 }
-input:focus{
+
+input:focus {
   outline-width: 0;
 }
 
+/** Helper Classes **/
+
+.h-scroll-content {
+  overflow: auto;
+}
+
+.h-ltr {
+  direction: ltr;
+  text-align: left;
+}

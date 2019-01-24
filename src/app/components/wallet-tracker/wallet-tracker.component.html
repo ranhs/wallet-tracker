@@ -1,0 +1,27 @@
+<!--app header-->
+<div class="top-bar">
+  Wallet Tracker
+</div>
+<div class="content">
+  <!--application table-->
+  <div>
+    <wallet-action *ngIf="showEditComponent"
+                   [initTransaction]="initTransaction"
+                   [isNew]="isNew"
+                   (save)="onTransactionSaved($event)"
+                   (cancel)="onEditCancel()"></wallet-action>
+    <!--Add new button-->
+    <a class="add-button"
+       *ngIf="!showEditComponent"
+       (click)="actionManager.addTransaction$.emit()">
+      הוסף
+    </a>
+  </div>
+  <app-wallet-table class="h-scroll-content"
+                    [addTransaction]="transactionToAdd"
+                    [updateTransaction]="transactionToUpdate"
+                    [canEdit]="!showEditComponent"
+                    (addNew)="onAddNew($event)"
+                    (edit)="onEdit($event)"></app-wallet-table>
+
+</div>

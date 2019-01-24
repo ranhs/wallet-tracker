@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { WalletTransaction } from '../wallet.transaction';
+import { WalletTransaction } from '../../../../utility/wallet.transaction';
 import { TagContentType } from '@angular/compiler';
-import { LoginInfoService } from '../login-info.service';
+import { LoginInfoService } from '../../../login/services/login-info.service';
 import { TransactionService } from './transaction.service';
 
 
@@ -42,7 +42,7 @@ export class TransactionStorageService implements TransactionService {
 
   getTransactions(startDate : Date, endDate : Date) : Promise<WalletTransaction[]> {
     return new Promise<WalletTransaction[]>((resolve, reject) => {
-      var rv = this.http.get(this.apiUrl('/transactions')).subscribe( (data : HttpWalletTransaction[] ) => {
+      var rv = this.http.get(this.apiUrl('/transactionList')).subscribe( (data : HttpWalletTransaction[] ) => {
         var transactions : WalletTransaction[] = [];
         for ( var trans of data ) {
           transactions.push( new WalletTransaction(trans.id, new Date(trans.date.year, trans.date.month-1, trans.date.day), trans.description, trans.value, trans.total));
@@ -56,7 +56,7 @@ export class TransactionStorageService implements TransactionService {
 
   insertTransaction(trans: WalletTransaction) : Promise<WalletTransaction> {
     return new Promise<WalletTransaction>( (resolve, reject) => {
-      var rv = this.http.post<HttpWalletTransaction>(this.apiUrl('/transactions'), {
+      var rv = this.http.post<HttpWalletTransaction>(this.apiUrl('/transactionList'), {
         id : trans.id,
         date: {
           year: trans.date.getFullYear(),
@@ -97,7 +97,7 @@ export class TransactionStorageService implements TransactionService {
           prev_id: trans.prev_id
         });
       }
-      this.http.put<HttpWalletTransaction[]>(this.apiUrl('/transactions'), httpTrans).subscribe(()=>{
+      this.http.put<HttpWalletTransaction[]>(this.apiUrl('/transactionList'), httpTrans).subscribe(()=>{
         resolve(undefined);
       }, (error) => {
         console.log('post failed', error);

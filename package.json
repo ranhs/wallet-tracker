@@ -5,6 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
+    "start-client": "ng serve",
     "build": "ng build",
     "postinstall": "ng build --aot -prod && tsc src/server/plugin.ts && tsc src/server/walletDB.ts",
     "test": "ng test",

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { $ } from 'jquery';
-import { WalletTransaction } from './wallet.transaction';
+import { WalletTransaction } from './utility/wallet.transaction';
 
 @Component({
   selector: 'app-root',
