@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { WalletTransaction } from '../wallet.transaction';
-import { TransactionServiceGen } from '../transaction.service/transection.service.gen';
+import { WalletTransaction } from '../../../../utility/wallet.transaction';
+import { TransactionServiceGen } from '../../services/transaction.service/transection.service.gen';
 
 @Component({
   selector: 'app-wallet-table',

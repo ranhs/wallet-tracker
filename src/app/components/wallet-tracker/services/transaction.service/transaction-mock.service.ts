@@ -1,6 +1,6 @@
 import { TransactionService } from "./transaction.service";
 import { Injectable } from "@angular/core";
-import { WalletTransaction } from "../wallet.transaction";
+import { WalletTransaction } from "../../../../utility/wallet.transaction";
 
 @Injectable()
 export class TransactionMockService  implements TransactionService {

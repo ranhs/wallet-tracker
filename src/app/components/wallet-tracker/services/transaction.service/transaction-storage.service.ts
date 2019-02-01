@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { WalletTransaction } from '../wallet.transaction';
+import { WalletTransaction } from '../../../../utility/wallet.transaction';
 import { TagContentType } from '@angular/compiler';
-import { LoginInfoService } from '../login-info.service';
+import { LoginInfoService } from '../../../login/services/login-info.service';
 import { TransactionService } from './transaction.service';
 
 

@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { WalletTransaction } from '../wallet.transaction';
+import { WalletTransaction } from '../../../../utility/wallet.transaction';
 
 const DAY = 24*60*60*1000;
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { $ } from 'jquery';
-import { WalletTransaction } from '../wallet.transaction';
-import { LoginInfoService } from '../login-info.service';
+import { WalletTransaction } from '../../utility/wallet.transaction';
+import { LoginInfoService } from '../login/services/login-info.service';
 
 @Component({
   selector: 'app-wallet-tracker',

@@ -1,7 +1,7 @@
 import { TransactionService } from "./transaction.service";
 import { Injectable } from "@angular/core";
 import { TransactionStorageService } from "./transaction-storage.service";
-import { WalletTransaction } from "../wallet.transaction";
+import { WalletTransaction } from "../../../../utility/wallet.transaction";
 import { TransactionMockService } from "./transaction-mock.service";
 
 @Injectable()

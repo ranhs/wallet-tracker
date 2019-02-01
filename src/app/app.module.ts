@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { WalletActionComponent } from './walletAction/wallet-action.component';
-import { CurrencyInputComponent } from './currencyInput/currency-input.component';
-import { DateEditorComponent } from './date-editor/date-editor.component';
-import { WalletTableComponent } from './wallet-table/wallet-table.component';
-import { TransactionStorageService } from './transaction.service/transaction-storage.service';
-import { LoginComponent } from './login/login.component';
+import { WalletActionComponent } from './components/wallet-tracker/components/wallet-action/wallet-action.component';
+import { CurrencyInputComponent } from './components/wallet-tracker/components/wallet-action/components/currencyInput/currency-input.component';
+import { DateEditorComponent } from './components/wallet-tracker/components/wallet-action/components/date-editor/date-editor.component';
+import { WalletTableComponent } from './components/wallet-tracker/components/wallet-table/wallet-table.component';
+import { TransactionStorageService } from './components/wallet-tracker/services/transaction.service/transaction-storage.service';
+import { LoginComponent } from './components/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
-import { WalletTrackerComponent } from './wallet-tracker/wallet-tracker.component';
-import { LoginInfoService } from './login-info.service';
-import { TransactionServiceGen } from './transaction.service/transection.service.gen';
-import { TransactionMockService } from './transaction.service/transaction-mock.service';
+import { WalletTrackerComponent } from './components/wallet-tracker/wallet-tracker.component';
+import { LoginInfoService } from './components/login/services/login-info.service';
+import { TransactionServiceGen } from './components/wallet-tracker/services/transaction.service/transection.service.gen';
+import { TransactionMockService } from './components/wallet-tracker/services/transaction.service/transaction-mock.service';
 
 
 
