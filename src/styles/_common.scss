@@ -43,15 +43,30 @@ input:focus {
   text-align: left;
 }
 
+.h-margin-right {
+  margin-right: 10px;
+}
+
 /** Buttons **/
 .wt-btn {
   width: 100%;
   height: 100%;
   font-size: inherit;
-  background-color: $success-color;
+  background-color: $primary-color;
   color: $white-text-color;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
+
+
+  &.--success {
+    background-color: $success-color;
+  }
+  &.--secondary {
+    background-color: $secondary-color;
+  }
+  &.--danger {
+    background-color: $danger-color;
+  }
 }

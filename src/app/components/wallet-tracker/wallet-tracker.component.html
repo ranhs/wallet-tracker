@@ -4,7 +4,7 @@
 </div>
 <!--TODO: think of better implementation for this-->
 <div style="display: flex; flex-direction: column-reverse">
-    <div *ngIf="showEditComponent">
+    <div *ngIf="transactionEditor.showEditor$ | async">
         <wallet-action [initTransaction]="initTransaction"
                        [isNew]="isNew"
                        (save)="onTransactionSaved($event)"
@@ -12,12 +12,7 @@
 
     </div>
     <div class="h-scroll-content">
-        <wallet-table [addTransaction]="transactionToAdd"
-                      [updateTransaction]="transactionToUpdate"
-                      [canEdit]="!showEditComponent"
-                      (addNew)="onAddNew($event)"
-                      (edit)="onEdit($event)"></wallet-table>
-
+        <wallet-table></wallet-table>
     </div>
 </div>
 <!-- Buttons-->

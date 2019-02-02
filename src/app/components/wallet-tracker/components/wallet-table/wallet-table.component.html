@@ -1,7 +1,7 @@
 <ul class="wallet-table">
     <li class="wallet-table-row"
-        *ngFor="let transaction of transactionList"
-        [class.--selected]="selected_id == transaction.id"
+        *ngFor="let transaction of actionManager.transactionList"
+        [class.--selected]="actionManager.selected_id == transaction.id"
         (click)="selectTransaction(transaction)">
         <div>
             <span class="wallet-table-row__title"> {{ transaction.description }} </span>

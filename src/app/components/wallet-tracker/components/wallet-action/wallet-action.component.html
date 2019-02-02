@@ -1,30 +1,25 @@
-<div id="wallet-action">
+<div>
 
     <currency-input [(ngModel)]="valueChange"></currency-input>
 
-    <div class="row">
-        <div class="label">
+    <div class="action-row">
+        <div class="action-row__label">
             עבור
         </div>
         <div> 
             <input [(ngModel)]="description" type="text" placeholder="על מה שולם?" style="width: 100%">
         </div>
     </div>
-    <div class="row">
-        <div class="label">
+    <div class="action-row">
+        <div class="action-row__label">
             תאריך
         </div>
        <date-editor [(ngModel)]="date" [min]="minDate" [max]="maxDate"></date-editor>
     </div>
-    <div class="row" style="padding-top: 10px; padding-bottom: 10px;">
+    <div class="action-row" style="padding-top: 10px; padding-bottom: 10px;">
         <div style="grid-column-start: 2; font-size: 22px; text-align: left;">
             <span>יתרה: </span>
             <span dir="ltr">{{total}}</span>
         </div>
-    </div>
-
-    <div id="buttons">
-        <button class="save" (click)="onSaveClicked()">{{saveText}}</button>
-        <button class="cancel" (click)="onCancelClicked()">בטל</button>
     </div>
 </div>

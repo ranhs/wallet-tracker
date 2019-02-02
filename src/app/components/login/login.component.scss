@@ -42,7 +42,7 @@
         }
 
     }
-    .row{
+    .action-row{
         display: block;
         grid-template-columns: 100px auto;
         padding: 20px 10px;
@@ -51,7 +51,7 @@
         direction: ltr;
         border-bottom: #e1e1e1 3px solid;
 
-        .label{
+        .action-row__label{
             font-weight: bold;
             font-size: 25px;
             margin-top: -3px;

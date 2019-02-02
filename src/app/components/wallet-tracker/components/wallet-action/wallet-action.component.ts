@@ -7,15 +7,19 @@ import {
 } from '@angular/core';
 import { WalletTransaction } from '../../../../utility/wallet.transaction';
 import { ActionManagerService } from '../../services/action-manager.service';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Transaction } from '../../../../../server/walletDB';
+import { TransactionEditorService } from '../../services/transaction-editor.service';
 
 const DAY = 24 * 60 * 60 * 1000;
 
 @Component({
-             selector: 'wallet-action',
-             templateUrl: './wallet-action.component.html',
-             styleUrls: ['./wallet-action.component.scss']
-           })
+  selector: 'wallet-action',
+  templateUrl: './wallet-action.component.html',
+  styleUrls: ['./wallet-action.component.scss']
+})
 export class WalletActionComponent implements OnInit {
+
   @Input() public initTransaction: WalletTransaction;
   @Input() public isNew: boolean;
   @Output() public save: EventEmitter<WalletTransaction> = new EventEmitter<WalletTransaction>();
@@ -26,7 +30,8 @@ export class WalletActionComponent implements OnInit {
   public date: Date;
   public valueChange: number = 0;
 
-  constructor(private actionManager: ActionManagerService) {
+  constructor(private actionManager: ActionManagerService,
+    private transactionEditor: TransactionEditorService) {
     var now: number = Date.now();
     var today: Date = new Date(now - now % DAY);
     this.date = new Date(today);
@@ -55,6 +60,16 @@ export class WalletActionComponent implements OnInit {
       this.baseValue = (this.initTransaction.total) ? this.initTransaction.total - this.valueChange : 0;
       this.description = (this.initTransaction.description) ? this.initTransaction.description : '';
     }
+
+    // Initialize event listeners:
+    this.actionManager.cancelEvent.subscribe(() => {
+      this.transactionEditor.currentTransaction$.next(null);
+    });
+    this.actionManager.saveEvent.subscribe(() => {
+      this.transactionEditor.currentTransaction$.next(
+        // TODO: find a better way to get the id
+        new WalletTransaction(this.actionManager.nextId, this.date, this.description, this.valueChange, this.total));
+    });
   }
 
   public get saveText(): string {
@@ -64,11 +79,6 @@ export class WalletActionComponent implements OnInit {
   public get total(): number {
     let total = Math.round((1 * this.baseValue + 1 * this.valueChange) * 10) / 10;
     return total;
-  }
-
-  public onSaveClicked() {
-    let trans = new WalletTransaction(this.initTransaction.id, this.date, this.description, this.valueChange, this.total);
-    this.save.emit(trans);
   }
 
   public onCancelClicked() {
