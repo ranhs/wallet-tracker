@@ -7,8 +7,6 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { WalletTransaction } from '../../../utility/wallet.transaction';
 import { TransactionEditorService } from './transaction-editor.service';
 import { Observable } from 'rxjs/Observable';
-import { EventListener } from '@angular/core/src/debug/debug_node';
-import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class ActionManagerService implements OnInit {
@@ -47,12 +45,29 @@ export class ActionManagerService implements OnInit {
     return 0;
   }
 
+  editSelectedTransaction(): Promise<void> {
+    // TODO: get the transaction properly via DB
+    const trans = this.transactionList[this.selected_id - 1];
+    return this.editTransaction(trans);
+  }
+
+  deleteSelectedTransaction(): Promise<void> {
+    return undefined;
+  }
+
   async addNewTransaction(): Promise<void> {
     this.selected_id = 0;
     const newTransaction: WalletTransaction = await this.transactionEditor.getNewTransaction();
     if (newTransaction) {
       // TODO: add transaction to Database here
       this.transactionList.push(newTransaction);
+    }
+  }
+
+  async editTransaction(transaction: WalletTransaction): Promise<void> {
+    const updatedTransaction: WalletTransaction = await this.transactionEditor.editExistingTransaction(transaction);
+    if (updatedTransaction) {
+      // TODO: add transaction to Database here
     }
   }
 

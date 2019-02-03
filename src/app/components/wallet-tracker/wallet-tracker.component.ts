@@ -15,8 +15,6 @@ import { TransactionEditorService } from './services/transaction-editor.service'
            })
 export class WalletTrackerComponent implements OnInit {
   public valueChange: number;
-  // public showEditComponent = false;
-  public initTransaction: WalletTransaction;
   public transactionToAdd: WalletTransaction;
   public transactionToUpdate: WalletTransaction;
   public isNew: boolean;
@@ -35,12 +33,6 @@ export class WalletTrackerComponent implements OnInit {
 
   // public get loginName(): string {
   //   return this.loginInfoService.name;
-  // }
-  //
-  // onAddNew(newTransaction: WalletTransaction) {
-  //   this.initTransaction = newTransaction;
-  //   this.isNew = true;
-  //   this.showEditComponent = true;
   // }
   //
   // onEdit(transaction: WalletTransaction) {
@@ -63,12 +55,6 @@ export class WalletTrackerComponent implements OnInit {
     }
 
     // this.showEditComponent = false;
-    this.initTransaction = undefined;
-  }
-
-  public onEditCancel() {
-    this.transactionToAdd = undefined;
-    // this.showEditComponent = false;
-    this.initTransaction = undefined;
+    // this.initTransaction = undefined;
   }
 }

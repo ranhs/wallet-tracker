@@ -108,7 +108,7 @@ export class CurrencyInputComponent implements ControlValueAccessor, OnInit {
     }
 
     public onSignClicked() {
-        this.minus = !this.minus
+        this.minus = !this.minus;
         if ( this.innerValue !== 0 ) {
             this.onValueChange();
         }

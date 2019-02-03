@@ -20,13 +20,19 @@ export class TransactionEditorService {
     return this.currentTransaction$.pipe(skip(1), take(1)).toPromise()
       .then((walletTransaction) => {
         this.showEditor$.next(false);
-        console.log('returned', walletTransaction);
         return walletTransaction;
       });
   }
 
   editExistingTransaction(walletTransaction: WalletTransaction): Promise<WalletTransaction> {
-    return undefined;
+    // Initialize the editor with a new transaction
+    this.currentTransaction$.next(walletTransaction);
+    this.showEditor$.next(true);
+    return this.currentTransaction$.pipe(skip(1), take(1)).toPromise()
+      .then((walletTransaction) => {
+        this.showEditor$.next(false);
+        console.log('returned', walletTransaction);
+        return walletTransaction;
+      });
   }
-
 }

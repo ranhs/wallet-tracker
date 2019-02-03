@@ -5,7 +5,8 @@
 <!--TODO: think of better implementation for this-->
 <div style="display: flex; flex-direction: column-reverse">
     <div *ngIf="transactionEditor.showEditor$ | async">
-        <wallet-action [initTransaction]="initTransaction"
+        <!--[initTransaction]="actionManager.initTransaction"-->
+        <wallet-action
                        [isNew]="isNew"
                        (save)="onTransactionSaved($event)"
                        (cancel)="onEditCancel()"></wallet-action>

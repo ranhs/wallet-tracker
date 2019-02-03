@@ -7,8 +7,6 @@ import {
 } from '@angular/core';
 import { WalletTransaction } from '../../../../utility/wallet.transaction';
 import { ActionManagerService } from '../../services/action-manager.service';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Transaction } from '../../../../../server/walletDB';
 import { TransactionEditorService } from '../../services/transaction-editor.service';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -20,7 +18,9 @@ const DAY = 24 * 60 * 60 * 1000;
 })
 export class WalletActionComponent implements OnInit {
 
-  @Input() public initTransaction: WalletTransaction;
+  get initTransaction(): WalletTransaction {
+    return this.transactionEditor.currentTransaction$.getValue();
+  }
   @Input() public isNew: boolean;
   @Output() public save: EventEmitter<WalletTransaction> = new EventEmitter<WalletTransaction>();
   @Output() public cancel: EventEmitter<any> = new EventEmitter<any>();
