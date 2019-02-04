@@ -5,14 +5,12 @@
 <!--TODO: think of better implementation for this-->
 <div style="display: flex; flex-direction: column-reverse">
     <div *ngIf="transactionEditor.showEditor$ | async">
-        <!--[initTransaction]="actionManager.initTransaction"-->
-        <wallet-action
-                       [isNew]="isNew"
-                       (save)="onTransactionSaved($event)"
-                       (cancel)="onEditCancel()"></wallet-action>
+        <wallet-action [isNew]="isNew"
+                       (save)="onTransactionSaved($event)"></wallet-action>
 
     </div>
-    <div class="h-scroll-content">
+    <div class="h-scroll-content"
+         scrollToBottom>
         <wallet-table></wallet-table>
     </div>
 </div>

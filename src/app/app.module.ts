@@ -18,6 +18,7 @@ import { TransactionMockService } from './components/wallet-tracker/services/tra
 import { ActionManagerService } from './components/wallet-tracker/services/action-manager.service';
 import { ActionsButtonsComponent } from './components/wallet-tracker/components/actions-buttons/actions-buttons.component';
 import { TransactionEditorService } from './components/wallet-tracker/services/transaction-editor.service';
+import { ScrollToBottomDirective } from './components/wallet-tracker/directives/scroll-to-bottom.directive';
 
 @NgModule({
             declarations: [
@@ -28,7 +29,8 @@ import { TransactionEditorService } from './components/wallet-tracker/services/t
               WalletTableComponent,
               LoginComponent,
               WalletTrackerComponent,
-              ActionsButtonsComponent
+              ActionsButtonsComponent,
+              ScrollToBottomDirective
             ],
             imports: [
               BrowserModule,
