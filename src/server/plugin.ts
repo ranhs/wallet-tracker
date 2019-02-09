@@ -7,7 +7,7 @@ export function plugin(app) {
     app.use(bodyParser.urlencoded({extended:false}));
     app.use(bodyParser.json());
 
-    app.get('/transactions', (req, res) => {
+    app.get('/transactionList', (req, res) => {
         var url_parts : url.Url = url.parse(req.url, true);
         var dbInfo = new DbInfo(url_parts.query.host, url_parts.query.user, url_parts.query.password, url_parts.query.database);
         WalletDB.getTransactions(dbInfo).then( (transactions) => {
@@ -17,7 +17,7 @@ export function plugin(app) {
         });
     });
 
-    app.post('/transactions', (req, res) => {
+    app.post('/transactionList', (req, res) => {
         var url_parts : url.Url = url.parse(req.url, true);
         var dbInfo = new DbInfo(url_parts.query.host, url_parts.query.user, url_parts.query.password, url_parts.query.database);
         WalletDB.insertTransaction(dbInfo, req.body).then( (data)=> {
@@ -27,7 +27,7 @@ export function plugin(app) {
         });
     });
 
-    app.put('/transactions', (req, res) => {
+    app.put('/transactionList', (req, res) => {
         var url_parts : url.Url = url.parse(req.url, true);
         var dbInfo = new DbInfo(url_parts.query.host, url_parts.query.user, url_parts.query.password, url_parts.query.database);
         var body = req.body;
@@ -41,7 +41,7 @@ export function plugin(app) {
         });
     });
 
-    app.delete('/transactions/:id', (req, res) => {
+    app.delete('/transactionList/:id', (req, res) => {
         var url_parts : url.Url = url.parse(req.url, true);
         var dbInfo = new DbInfo(url_parts.query.host, url_parts.query.user, url_parts.query.password, url_parts.query.database);
         WalletDB.delete(dbInfo, req.params.id).then( (transaction) => {

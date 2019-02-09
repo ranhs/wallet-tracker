@@ -15,6 +15,8 @@ import { WalletTrackerComponent } from './components/wallet-tracker/wallet-track
 import { LoginInfoService } from './components/login/services/login-info.service';
 import { TransactionServiceGen } from './components/wallet-tracker/services/transaction.service/transection.service.gen';
 import { TransactionMockService } from './components/wallet-tracker/services/transaction.service/transaction-mock.service';
+import { ActionManagerService } from './components/wallet-tracker/services/action-manager.service';
+import { ActionsButtonsComponent } from './components/wallet-tracker/components/actions-buttons/actions-buttons.component';
 
 
 
@@ -26,7 +28,8 @@ import { TransactionMockService } from './components/wallet-tracker/services/tra
     DateEditorComponent,
     WalletTableComponent,
     LoginComponent,
-    WalletTrackerComponent
+    WalletTrackerComponent,
+    ActionsButtonsComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,8 @@ import { TransactionMockService } from './components/wallet-tracker/services/tra
     TransactionStorageService,
     TransactionServiceGen, 
     TransactionMockService, 
-    LoginInfoService
+    LoginInfoService,
+    ActionManagerService
   ],
   bootstrap: [AppComponent]
 })

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { $ } from 'jquery';
 import { WalletTransaction } from '../../utility/wallet.transaction';
 import { LoginInfoService } from '../login/services/login-info.service';
+import { ActionManagerService } from './services/action-manager.service';
 
 @Component({
   selector: 'app-wallet-tracker',
@@ -9,22 +10,23 @@ import { LoginInfoService } from '../login/services/login-info.service';
   styleUrls: ['./wallet-tracker.component.scss']
 })
 export class WalletTrackerComponent implements OnInit {
-  title = 'app';
   public valueChange : number;
   public showEditComponent = false;
-  public initTransaction : WalletTransaction = undefined;
-  public transactionToAdd : WalletTransaction = undefined;
-  public transactionToUpdate : WalletTransaction = undefined;
-  public isNew : boolean = undefined;
+  public initTransaction : WalletTransaction;
+  public transactionToAdd : WalletTransaction;
+  public transactionToUpdate : WalletTransaction;
+  public isNew : boolean;
 
-  constructor(private loginInfoService : LoginInfoService){
+  constructor(private loginInfoService : LoginInfoService,
+              public actionManager: ActionManagerService){
   }
   
   ngOnInit(){
     //console.log( this.loginInfoService.name, this.loginInfoService.userInfo);
-    //document ready function
-    // $(function(){
-    //   AppComponent.scrollContentToBottom(); //initialize the scrolling to bottom
+
+    // Initialize the scrollContentToBottom function
+    // $(() => {
+    //   this.scrollContentToBottom(); //initialize the scrolling to bottom
     // });
   }
 
@@ -45,8 +47,8 @@ export class WalletTrackerComponent implements OnInit {
   }
 
   //this function needs to be called whenever we add an item to the list
-  static scrollContentToBottom(){
-    let $content = $("#content");
+  private scrollContentToBottom(){
+    let $content = $("wallet-table");
     $content.scrollTop($content.height());
   }
 
