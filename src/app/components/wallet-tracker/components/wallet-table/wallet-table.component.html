@@ -1,19 +1,17 @@
-
-
-<ul>
-  <li *ngFor="let t of transactions" (click)="select(t)" [class]="(isSelected(t))?'trans-select':'trans-unselect'">
-    <div>
-      <span class="sum" [class.positive]="t.value > 0">{{t.displayValue}}</span>
-      <span class="left">{{t.total}}</span>
-    </div>
-    <div>
-      <span class="title">{{t.description}}</span>
-      <span class="date">{{t.displayDate}}</span>
-    </div>
-    <div id="buttons">
-        <button class="delete" (click)="onDeleteClicked(t)" *ngIf="isSelected(t) > 0 && enableEdit">מחק</button>
-        <button class="edit" (click)="onEditClicked(t)" *ngIf="isSelected(t) > 0 && enableEdit">ערוך</button>
-    </div>
-      </li>
+<ul class="wallet-table">
+    <li class="wallet-table-row"
+        *ngFor="let transaction of actionManager.transactionList"
+        [class.--selected]="actionManager.selected_id == transaction.id"
+        (click)="selectTransaction(transaction)">
+        <div>
+            <span class="wallet-table-row__title"> {{ transaction.description }} </span>
+            <span class="wallet-table-row__date"> {{ transaction.displayDate }} </span>
+        </div>
+        <div class="h-ltr">
+      <span class="wallet-table-row__sum"
+            [class.--positive]="transaction.value > 0"> {{ transaction.displayValue }} </span>
+            <span> {{ transaction.total }} </span>
+        </div>
+    </li>
 </ul>
 <button (click)="onAddClicked()" *ngIf="canAdd && enableEdit">Add...</button>

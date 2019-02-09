@@ -17,33 +17,36 @@ import { TransactionServiceGen } from './components/wallet-tracker/services/tran
 import { TransactionMockService } from './components/wallet-tracker/services/transaction.service/transaction-mock.service';
 import { ActionManagerService } from './components/wallet-tracker/services/action-manager.service';
 import { ActionsButtonsComponent } from './components/wallet-tracker/components/actions-buttons/actions-buttons.component';
-
-
+import { TransactionEditorService } from './components/wallet-tracker/services/transaction-editor.service';
+import { ScrollToBottomDirective } from './components/wallet-tracker/directives/scroll-to-bottom.directive';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    WalletActionComponent,
-    CurrencyInputComponent,
-    DateEditorComponent,
-    WalletTableComponent,
-    LoginComponent,
-    WalletTrackerComponent,
-    ActionsButtonsComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    FormsModule,
-    AppRoutingModule
-  ],
-  providers: [
-    TransactionStorageService,
-    TransactionServiceGen, 
-    TransactionMockService, 
-    LoginInfoService,
-    ActionManagerService
-  ],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
+            declarations: [
+              AppComponent,
+              WalletActionComponent,
+              CurrencyInputComponent,
+              DateEditorComponent,
+              WalletTableComponent,
+              LoginComponent,
+              WalletTrackerComponent,
+              ActionsButtonsComponent,
+              ScrollToBottomDirective
+            ],
+            imports: [
+              BrowserModule,
+              HttpClientModule,
+              FormsModule,
+              AppRoutingModule
+            ],
+            providers: [
+              TransactionStorageService,
+              TransactionServiceGen,
+              TransactionMockService,
+              LoginInfoService,
+              ActionManagerService,
+              TransactionEditorService
+            ],
+            bootstrap: [AppComponent]
+          })
+export class AppModule {
+}

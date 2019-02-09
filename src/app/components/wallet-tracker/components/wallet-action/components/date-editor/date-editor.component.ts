@@ -1,7 +1,7 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
-const DAY = 24*60*60*1000;
+const DAY = 24 * 60 * 60 * 1000;
 
 export const DATE_EDIT_CONTROL_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
@@ -15,69 +15,71 @@ export const DATE_EDIT_CONTROL_VALUE_ACCESSOR: any = {
   styleUrls: ['./date-editor.component.scss'],
   providers: [DATE_EDIT_CONTROL_VALUE_ACCESSOR]
 })
-export class DateEditorComponent implements ControlValueAccessor  {
-  @Input() public max : Date;
-  @Input() public min : Date;
+export class DateEditorComponent implements ControlValueAccessor {
+  @Input() public max: Date;
+  @Input() public min: Date;
 
   private onChangeCallback;
   private onTouchedCallback;
 
-  private _innerValue : Date;
-  constructor() { }
+  private _innerValue: Date;
 
-  private dd(val: number) : string {
-    return `${(val<10)?'0':''}${val}`;
+  constructor() {
   }
 
-  public get dateStr() : string {
-    var date : Date = this.innerValue;
-    var dateStr : string = '';
-    var month : string;
+  private dd(val: number): string {
+    return `${(val < 10) ? '0' : ''}${val}`;
+  }
 
-    if ( !date ) return '';
-    switch(date.getMonth()+1){
+  public get dateStr(): string {
+    var date: Date = this.innerValue;
+    var dateStr: string = '';
+    var month: string;
+
+    if (!date) return '';
+    switch (date.getMonth() + 1) {
       case 1:
-        month = "ינו";
+        month = 'ינו';
         break;
       case 2:
-        month = "פבר";
+        month = 'פבר';
         break;
       case 3:
-        month = "מרץ";
+        month = 'מרץ';
         break;
-      case 4: 
-        month = "אפר";
+      case 4:
+        month = 'אפר';
         break;
-      case 5: 
-        month = "מאי";
+      case 5:
+        month = 'מאי';
         break;
-      case 6: 
-        month = "יוני";
+      case 6:
+        month = 'יוני';
         break;
-      case 7: 
-        month = "יולי";
+      case 7:
+        month = 'יולי';
         break;
-      case 8: 
-        month = "אוג";
+      case 8:
+        month = 'אוג';
         break;
-      case 9: 
-        month = "ספט";
+      case 9:
+        month = 'ספט';
         break;
-      case 10: 
-        month = "אוקט";
+      case 10:
+        month = 'אוקט';
         break;
-      case 11: 
-        month = "נוב";
+      case 11:
+        month = 'נוב';
         break;
-      case 12: 
-        month = "דצמ";
+      case 12:
+        month = 'דצמ';
         break;
     }
 
     dateStr += `${date.getDate()}`;
-    dateStr += " ";
+    dateStr += ' ';
     dateStr += month;
-    dateStr += " ";
+    dateStr += ' ';
     dateStr += `${date.getFullYear()}`;
 
     return dateStr;
@@ -85,49 +87,48 @@ export class DateEditorComponent implements ControlValueAccessor  {
 
   private onValueChange() {
     if (this.onChangeCallback) {
-        this.onChangeCallback(this.innerValue);
+      this.onChangeCallback(this.innerValue);
     }
   }
 
-  private get innerValue() : Date {
+  private get innerValue(): Date {
     return this._innerValue;
   }
 
   private set innerValue(value: Date) {
-    if ( this._innerValue !== value ) {
+    if (this._innerValue !== value) {
       this._innerValue = value;
       this.onValueChange();
     }
   }
 
-  
   public writeValue(value: Date) {
     if (value !== this.innerValue) {
-        this.innerValue = value;
+      this.innerValue = value;
     }
   }
 
-  public registerOnChange(fn: (Date)=>void) {
-      this.onChangeCallback = fn;
+  public registerOnChange(fn: (Date) => void) {
+    this.onChangeCallback = fn;
   }
 
   public registerOnTouched(fn: any) {
-      this.onTouchedCallback = fn;
+    this.onTouchedCallback = fn;
   }
 
-  public get upEnabled() : boolean {
+  public get upEnabled(): boolean {
     return this.innerValue > this.min;
   }
 
-  public get downEnabled() : boolean {
+  public get downEnabled(): boolean {
     return this.innerValue < this.max;
   }
 
   public upClicked() {
-    this.innerValue = new Date(this.innerValue.valueOf() - DAY)
+    this.innerValue = new Date(this.innerValue.valueOf() - DAY);
   }
 
   public downClicked() {
-    this.innerValue = new Date(this.innerValue.valueOf() + DAY)
+    this.innerValue = new Date(this.innerValue.valueOf() + DAY);
   }
 }

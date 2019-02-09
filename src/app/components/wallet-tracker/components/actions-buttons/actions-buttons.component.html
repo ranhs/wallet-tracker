@@ -1,3 +1,25 @@
-<button class="wt-btn">
-  הוסף
+<button class="wt-btn --success"
+        *ngIf="['NORMAL', 'SELECTED'].indexOf((buttonState$ | async)) > -1"
+        (click)="actionManager.addNewTransaction()">
+    הוסף
+</button>
+<button class="wt-btn"
+        *ngIf="(buttonState$ | async) === 'SELECTED'"
+        (click)="actionManager.editSelectedTransaction()">
+    ערוך
+</button>
+<button class="wt-btn --danger"
+        *ngIf="(buttonState$ | async) === 'SELECTED'">
+    מחק
+</button>
+
+<button class="wt-btn"
+        *ngIf="(buttonState$ | async) === 'ACTION'"
+        (click)="actionManager.saveEvent.emit()">
+    שמור
+</button>
+<button class="wt-btn --secondary"
+        *ngIf="(buttonState$ | async) === 'ACTION'"
+        (click)="actionManager.cancelEvent.emit()">
+    בטל
 </button>
