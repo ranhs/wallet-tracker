@@ -1,44 +1,42 @@
-#buttons {
-    display: block;
-    float: top;
-}
-ul{
-    margin: 0;
-    list-style-type: none;
-    padding: 0;
-    height: auto;
-    overflow: auto;
+@import '../../../../../styles/colors';
 
-    li{
-        display: grid;
-        grid-template-columns: 70px auto;
-        padding: 10px 15px;
-        border-bottom: #d0d0d0 2px solid;
+.wallet-table {
+  margin: 0;
+  list-style-type: none;
+  padding: 0;
 
-        span{
-            display: block;
-        }
-        span.title, span.date{
-            text-align: right;
-            direction: rtl;
-        }
-        span.date{
-            font-size: 18px;
-        }
-        span.title{
-            font-size: 22px;
-            margin-bottom: 5px;
-            font-weight: 500;
-        }
-        span.sum{
-            font-size: 25px;
-            color: #d33c2d;
-        }
-        span.sum.positive{
-            color: #007236;
-        }
+  &-row {
+    display: grid;
+    grid-template-columns: auto 70px;
+    padding: 10px 15px;
+    border-bottom: $border-color 2px solid;
+
+    &.--selected {
+      background-color: $highlight-white-color;
     }
-    li.trans-select {
-        background-color: yellow;
+
+    // TODO: reorganize this: don't use native element selector ..
+    span {
+      display: block;
     }
+
+    &__date {
+      font-size: 18px;
+    }
+
+    &__title {
+      font-size: 22px;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    &__sum {
+      font-size: 25px;
+      color: #d33c2d;
+
+      &.--positive {
+        color: #007236;
+      }
+    }
+  }
 }

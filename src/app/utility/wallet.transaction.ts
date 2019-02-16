@@ -1,61 +1,61 @@
 export class WalletTransaction {
-    constructor( 
-        private _id : number,
-        private _date : Date,
-        private _description : string,
-        private _value : number, 
-        private _total : number) {
-    }
+  constructor(
+    private _id: number,
+    private _date: Date,
+    private _description: string,
+    private _value: number,
+    private _total: number) {
+  }
 
-    public get id() : number {
-        return this._id;
-    }
+  public get id(): number {
+    return this._id;
+  }
 
-    public get date() : Date {
-        return this._date;
-    }
+  public get date(): Date {
+    return this._date;
+  }
 
-    private dd(val: number) : string {
-        return `${(val<10)?'0':''}${val}`;
-    }
-    
-    private date2string(date: Date) : string {
-        return `${this.dd(date.getDate())}/${this.dd(date.getMonth()+1)}/${date.getFullYear()}`;
-    }
+  private dd(val: number): string {
+    return `${(val < 10) ? '0' : ''}${val}`;
+  }
 
-    public get displayDate() : string {
-        return `${this.date2string(this._date)}`
-    }
+  private date2string(date: Date): string {
+    return `${this.dd(date.getDate())}/${this.dd(date.getMonth() + 1)}/${date.getFullYear()}`;
+  }
 
-    public get description() : string {
-        return this._description;
-    }
+  public get displayDate(): string {
+    return `${this.date2string(this._date)}`;
+  }
 
-    public get value() : number {
-        return this._value;
-    }
+  public get description(): string {
+    return this._description;
+  }
 
-    public get displayValue() : string {
-        return `${(this._value>0)?'+':''}${this._value}`;
-    }
+  public get value(): number {
+    return this._value;
+  }
 
-    public get total() : number {
-        return this._total;
-    }
+  public get displayValue(): string {
+    return `${(this._value > 0) ? '+' : ''}${this._value}`;
+  }
 
-    private _prev_id : number = undefined;
+  public get total(): number {
+    return this._total;
+  }
 
-    public get prev_id() : number {
-        return this._prev_id;
-    }
+  private _prev_id: number = undefined;
 
-    public rename(new_id : number) {
-        this._prev_id = this.id;
-        this._id = new_id;
-    }
+  public get prev_id(): number {
+    return this._prev_id;
+  }
 
-    public adjustTotal(gap: number) {
-        this._total += gap;
-        this._total = Math.round(this._total * 10) / 10;
-    }
+  public rename(new_id: number) {
+    this._prev_id = this.id;
+    this._id = new_id;
+  }
+
+  public adjustTotal(gap: number) {
+    this._total += gap;
+    this._total = Math.round(this._total * 10) / 10;
+  }
 }

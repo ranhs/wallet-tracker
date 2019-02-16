@@ -1,7 +1,7 @@
 <!--app header-->
 <div class="top-bar h-ltr">
     Wallet Tracker
-    <a href="/login" class="link">{{loginName}}</a>
+    <a routerLink="/login" class="top-bar__right">{{loginName}}</a>
 </div>
 <!--TODO: think of better implementation for this-->
 <div style="display: flex; flex-direction: column-reverse">
@@ -12,6 +12,8 @@
     </div>
     <div class="h-scroll-content"
          scrollToBottom>
-        <app-wallet-table></app-wallet-table>
+        <wallet-table></wallet-table>
     </div>
 </div>
+<!-- Buttons-->
+<actions-buttons></actions-buttons>

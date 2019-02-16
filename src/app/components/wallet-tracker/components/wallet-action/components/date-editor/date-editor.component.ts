@@ -1,5 +1,12 @@
-import { Component, forwardRef, Input } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import {
+  Component,
+  forwardRef,
+  Input
+} from '@angular/core';
+import {
+  NG_VALUE_ACCESSOR,
+  ControlValueAccessor
+} from '@angular/forms';
 
 const DAY = 24 * 60 * 60 * 1000;
 
@@ -36,7 +43,9 @@ export class DateEditorComponent implements ControlValueAccessor {
     var dateStr: string = '';
     var month: string;
 
-    if (!date) return '';
+    if (!date) {
+      return '';
+    }
     switch (date.getMonth() + 1) {
       case 1:
         month = 'ינו';
