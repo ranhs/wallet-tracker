@@ -7,6 +7,7 @@ import { WalletTransaction } from '../../utility/wallet.transaction';
 import { LoginInfoService } from '../login/services/login-info.service';
 import { ActionManagerService } from './services/action-manager.service';
 import { TransactionEditorService } from './services/transaction-editor.service';
+import { ButtonsService, BtnFilter } from './services/buttons.service';
 
 @Component({
              selector: 'app-wallet-tracker',
@@ -21,7 +22,8 @@ export class WalletTrackerComponent implements OnInit {
 
   constructor(private loginInfoService: LoginInfoService,
     public actionManager: ActionManagerService,
-    public transactionEditor: TransactionEditorService) {
+    public transactionEditor: TransactionEditorService,
+    public buttonsSrv: ButtonsService) {
   }
 
   ngOnInit() {
@@ -29,32 +31,29 @@ export class WalletTrackerComponent implements OnInit {
     $(() => {
       this.scrollContentToBottom(); // initialize the scrolling to bottom
     });
+    this.buttonsSrv.add.visible = true;
+    this.buttonsSrv.edit.visible = false;
+    this.buttonsSrv.remove.visible = false;
+    this.buttonsSrv.filter = BtnFilter.ADD | BtnFilter.EDIT | BtnFilter.REMOVE;
+    this.buttonsSrv.add.onClick( () => {
+      this.actionManager.addNewTransaction();
+    });
+    this.buttonsSrv.remove.onClick( () => {
+      this.actionManager.deleteSelectedTransaction();
+    })
+    this.buttonsSrv.edit.onClick( () => {
+      this.actionManager.editSelectedTransaction();
+    })
   }
 
   public get loginName(): string {
     return this.loginInfoService.name;
   }
-  //
-  // onEdit(transaction: WalletTransaction) {
-  //   this.initTransaction = transaction;
-  //   this.isNew = false;
-  //   this.showEditComponent = true;
-  // }
-
+  
   //this function needs to be called whenever we add an item to the list
   private scrollContentToBottom() {
     const $content = $('wallet-table');
     $content.scrollTop($content.height());
   }
 
-  public onTransactionSaved(trans: WalletTransaction) {
-    if (this.isNew) {
-      this.transactionToAdd = trans;
-    } else {
-      this.transactionToUpdate = trans;
-    }
-
-    // this.showEditComponent = false;
-    // this.initTransaction = undefined;
-  }
 }

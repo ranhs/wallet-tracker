@@ -1,41 +1,35 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { ActionManagerService } from '../../services/action-manager.service';
-import { map } from 'rxjs/operators';
-import { combineLatest } from 'rxjs/observable/combineLatest';
+import { Component } from '@angular/core';
+import { ButtonsService, BtnFilter } from '../../services/buttons.service';
 
-export type TButtonState = 'NORMAL' | 'SELECTED' | 'ACTION';
 
 @Component({
              selector: 'actions-buttons',
              templateUrl: './actions-buttons.component.html',
              styleUrls: ['./actions-buttons.component.scss']
            })
-export class ActionsButtonsComponent implements OnInit {
+export class ActionsButtonsComponent  {
 
-  buttonState$: Observable<TButtonState> = this.getButtonStateStream();
-
-  constructor(public actionManager: ActionManagerService) {
+  constructor(public buttonService: ButtonsService) {
   }
 
-  ngOnInit() {
+  public get showAdd() : boolean {
+    return this.buttonService.add.visible && !!(this.buttonService.filter & BtnFilter.ADD);
   }
 
-  private getButtonStateStream(): Observable<TButtonState> {
-    return combineLatest(
-      this.actionManager.selected_id$,
-      this.actionManager.isEditorShown$
-    )
-      .pipe(
-        map(([id, isEditorShown]: [number, boolean]): TButtonState => {
-          if (isEditorShown) {
-            return 'ACTION';
-          } else if (id) {
-            return 'SELECTED';
-          } else {
-            return 'NORMAL';
-          }
-        })
-      );
+  public get showEdit() : boolean {
+    return this.buttonService.edit.visible && !!(this.buttonService.filter & BtnFilter.EDIT);
   }
+
+  public get showRemove() : boolean {
+    return this.buttonService.remove.visible && !!(this.buttonService.filter & BtnFilter.REMOVE);
+  }
+
+  public get showSave() : boolean {
+    return this.buttonService.save.visible && !!(this.buttonService.filter & BtnFilter.SAVE);
+  }
+
+  public get showCancel() : boolean {
+    return this.buttonService.cancel.visible && !!(this.buttonService.filter & BtnFilter.CANCEL);
+  }
+
 }

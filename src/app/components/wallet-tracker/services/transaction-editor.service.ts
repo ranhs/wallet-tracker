@@ -5,34 +5,55 @@ import {
   take,
   skip
 } from 'rxjs/operators';
+import { ActionManagerService } from './action-manager.service';
+
+const DAY = 24 * 60 * 60 * 1000;
 
 @Injectable()
 export class TransactionEditorService {
 
-  showEditor$ = new BehaviorSubject<boolean>(false);
   currentTransaction$ = new BehaviorSubject(null);
+
+  private onEditTransactionMethod : (trans: WalletTransaction, isNew: boolean)=>Promise<WalletTransaction>;
 
   constructor() {
   }
 
-  getNewTransaction(): Promise<WalletTransaction> {
-    this.showEditor$.next(true);
-    return this.currentTransaction$.pipe(skip(1), take(1)).toPromise()
-      .then((walletTransaction) => {
-        this.showEditor$.next(false);
-        return walletTransaction;
-      });
+  public onEditTransaction( callback : (trans: WalletTransaction, isNew: boolean)=>Promise<WalletTransaction> ) {
+    this.onEditTransactionMethod = callback;
   }
 
-  editExistingTransaction(walletTransaction: WalletTransaction): Promise<WalletTransaction> {
-    // Initialize the editor with a new transaction
-    this.currentTransaction$.next(walletTransaction);
-    this.showEditor$.next(true);
-    return this.currentTransaction$.pipe(skip(1), take(1)).toPromise()
-      .then((walletTransaction) => {
-        this.showEditor$.next(false);
-        console.log('returned', walletTransaction);
-        return walletTransaction;
-      });
+  // fuction to be override by action-manager-service:
+  public getNextId : () => number = ()=>0;
+  public getLastTotal: () => number = ()=>0;
+
+
+  private getToday() : Date {
+    let now: number = Date.now();
+    let today: Date = new Date(now - now % DAY);
+    return today;
+  }
+
+  async getNewTransaction(): Promise<WalletTransaction> {
+    let newTransaction = new WalletTransaction(
+      this.getNextId(),
+      this.getToday(),
+      "",
+      0,
+      this.getLastTotal()
+    )
+    if ( this.onEditTransactionMethod ) {
+      newTransaction = await this.onEditTransactionMethod(newTransaction, true);
+    }
+    return newTransaction;
+  }
+
+  async editExistingTransaction(walletTransaction: WalletTransaction): Promise<WalletTransaction> {
+    console.log('editExistingTransaction', walletTransaction);
+    if ( this.onEditTransactionMethod ) {
+      walletTransaction = await this.onEditTransactionMethod(walletTransaction, false);
+    }
+    console.log('editExistingTransaction', walletTransaction);
+    return walletTransaction;
   }
 }
