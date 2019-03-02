@@ -1,6 +1,7 @@
 import {
   Component,
-  OnInit
+  OnInit,
+  ViewChild
 } from '@angular/core';
 import * as $ from 'jquery';
 import { WalletTransaction } from '../../utility/wallet.transaction';
@@ -8,6 +9,7 @@ import { LoginInfoService } from '../login/services/login-info.service';
 import { ActionManagerService } from './services/action-manager.service';
 import { TransactionEditorService } from './services/transaction-editor.service';
 import { ButtonsService, BtnFilter } from './services/buttons.service';
+import { ScrollToBottomDirective } from './directives/scroll-to-bottom.directive';
 
 @Component({
              selector: 'app-wallet-tracker',
@@ -15,10 +17,7 @@ import { ButtonsService, BtnFilter } from './services/buttons.service';
              styleUrls: ['./wallet-tracker.component.scss']
            })
 export class WalletTrackerComponent implements OnInit {
-  public valueChange: number;
-  public transactionToAdd: WalletTransaction;
-  public transactionToUpdate: WalletTransaction;
-  public isNew: boolean;
+  @ViewChild(ScrollToBottomDirective) scrollDirective : ScrollToBottomDirective;
 
   constructor(private loginInfoService: LoginInfoService,
     public actionManager: ActionManagerService,
@@ -28,9 +27,6 @@ export class WalletTrackerComponent implements OnInit {
 
   ngOnInit() {
     // Initialize the scrollContentToBottom function - TODO: find a better way of doing it
-    $(() => {
-      this.scrollContentToBottom(); // initialize the scrolling to bottom
-    });
     this.buttonsSrv.add.visible = true;
     this.buttonsSrv.edit.visible = false;
     this.buttonsSrv.remove.visible = false;
@@ -49,11 +45,9 @@ export class WalletTrackerComponent implements OnInit {
   public get loginName(): string {
     return this.loginInfoService.name;
   }
-  
-  //this function needs to be called whenever we add an item to the list
-  private scrollContentToBottom() {
-    const $content = $('wallet-table');
-    $content.scrollTop($content.height());
-  }
 
+  public onItemsLoaded() {
+    this.scrollDirective.scrollDown();
+  }
+  
 }

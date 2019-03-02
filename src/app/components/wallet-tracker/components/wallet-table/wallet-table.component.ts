@@ -1,12 +1,17 @@
 import {
   Component,
   OnInit,
-  OnDestroy
+  OnDestroy,
+  ViewChild,
+  Output,
+  EventEmitter
 } from '@angular/core';
 import { WalletTransaction } from '../../../../utility/wallet.transaction';
 import { TransactionServiceGen } from '../../services/transaction.service/transection.service.gen';
 import { ActionManagerService } from '../../services/action-manager.service';
 import { Subject } from 'rxjs/Subject';
+import { viewParentEl } from '@angular/core/src/view/util';
+import { ScrollToBottomDirective } from '../../directives/scroll-to-bottom.directive';
 
 @Component({
              selector: 'wallet-table',
@@ -14,7 +19,7 @@ import { Subject } from 'rxjs/Subject';
              styleUrls: ['./wallet-table.component.scss']
            })
 export class WalletTableComponent implements OnInit, OnDestroy {
-
+  @Output() itemsLoaded = new EventEmitter();
   private destroy$ = new Subject<null>();
 
   constructor(private transactionStorageSrv: TransactionServiceGen,
@@ -33,6 +38,9 @@ export class WalletTableComponent implements OnInit, OnDestroy {
         for (const trans of this.actionManager.transactionList) {
           this.actionManager.nextId = Math.max(this.actionManager.nextId, trans.id + 1);
         }
+        setTimeout(()=>{
+          this.itemsLoaded.emit('loaded');
+        },0);
       }
     );
   }
